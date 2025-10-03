@@ -21,7 +21,7 @@
 
 # 000 Source Required Libraries -------------------------------------------
 # Load required libraries
-source("sdm_analysis/libraries.R")
+source("scripts/libraries.R")
 
 # Need to load some map data to use as strata for thinning occurrence records
 source("scripts/load_maps.R")
@@ -571,7 +571,7 @@ message("** Realized Niche PCA: ", date())
 # See malus_pca.R for plotting
 # This analysis builds off function created by authors of the ecospat and ade4 packages
 # I source these custom functions to save space herein
-source("./scripts/pca_functions.R")
+source("./scripts/pca_and_gap_functions.R")
 
 # Convert BG Rasters to Matrices for PCA
 bg_mat_full <- values(wclim_chl_subs) %>% na.omit() # remove NA Values
