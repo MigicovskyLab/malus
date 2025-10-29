@@ -16,26 +16,41 @@ library(purrr)
 
 # Malus fusca
 fus_pred_hist <- readRDS(file = './sdm_output/fus/subs/fus_pred_hist_subs.Rdata')
+fus_pred_ssp245_30 <- readRDS(file = './sdm_output/fus/subs/fus_pred_ssp245_30_subs.Rdata')
+fus_pred_ssp245_50 <- readRDS(file = './sdm_output/fus/subs/fus_pred_ssp245_50_subs.Rdata')
+fus_pred_ssp245_70 <- readRDS(file = './sdm_output/fus/subs/fus_pred_ssp245_70_subs.Rdata')
 fus_pred_ssp585_30 <- readRDS(file = './sdm_output/fus/subs/fus_pred_ssp585_30_subs.Rdata')
 fus_pred_ssp585_50 <- readRDS(file = './sdm_output/fus/subs/fus_pred_ssp585_50_subs.Rdata')
 fus_pred_ssp585_70 <- readRDS(file = './sdm_output/fus/subs/fus_pred_ssp585_70_subs.Rdata')
 # Malus coronaria
 cor_pred_hist <- readRDS(file = './sdm_output/cor/subs/cor_pred_hist_subs.Rdata')
+cor_pred_ssp245_30 <- readRDS(file = './sdm_output/cor/subs/cor_pred_ssp245_30_subs.Rdata')
+cor_pred_ssp245_50 <- readRDS(file = './sdm_output/cor/subs/cor_pred_ssp245_50_subs.Rdata')
+cor_pred_ssp245_70 <- readRDS(file = './sdm_output/cor/subs/cor_pred_ssp245_70_subs.Rdata')
 cor_pred_ssp585_30 <- readRDS(file = './sdm_output/cor/subs/cor_pred_ssp585_30_subs.Rdata')
 cor_pred_ssp585_50 <- readRDS(file = './sdm_output/cor/subs/cor_pred_ssp585_50_subs.Rdata')
 cor_pred_ssp585_70 <- readRDS(file = './sdm_output/cor/subs/cor_pred_ssp585_70_subs.Rdata')
 # Malus ioensis
 ion_pred_hist <- readRDS(file = './sdm_output/ion/subs/ion_pred_hist_subs.Rdata')
+ion_pred_ssp245_30 <- readRDS(file = './sdm_output/ion/subs/ion_pred_ssp245_30_subs.Rdata')
+ion_pred_ssp245_50 <- readRDS(file = './sdm_output/ion/subs/ion_pred_ssp245_50_subs.Rdata')
+ion_pred_ssp245_70 <- readRDS(file = './sdm_output/ion/subs/ion_pred_ssp245_70_subs.Rdata')
 ion_pred_ssp585_30 <- readRDS(file = './sdm_output/ion/subs/ion_pred_ssp585_30_subs.Rdata')
 ion_pred_ssp585_50 <- readRDS(file = './sdm_output/ion/subs/ion_pred_ssp585_50_subs.Rdata')
 ion_pred_ssp585_70 <- readRDS(file = './sdm_output/ion/subs/ion_pred_ssp585_70_subs.Rdata')
 # Malus angustifolia
 ang_pred_hist <- readRDS(file = './sdm_output/ang/subs/ang_pred_hist_subs.Rdata')
+ang_pred_ssp245_30 <- readRDS(file = './sdm_output/ang/subs/ang_pred_ssp245_30_subs.Rdata')
+ang_pred_ssp245_50 <- readRDS(file = './sdm_output/ang/subs/ang_pred_ssp245_50_subs.Rdata')
+ang_pred_ssp245_70 <- readRDS(file = './sdm_output/ang/subs/ang_pred_ssp245_70_subs.Rdata')
 ang_pred_ssp585_30 <- readRDS(file = './sdm_output/ang/subs/ang_pred_ssp585_30_subs.Rdata')
 ang_pred_ssp585_50 <- readRDS(file = './sdm_output/ang/subs/ang_pred_ssp585_50_subs.Rdata')
 ang_pred_ssp585_70 <- readRDS(file = './sdm_output/ang/subs/ang_pred_ssp585_70_subs.Rdata')
 # Sect. Chloromeles
 chl_pred_hist <- readRDS(file = './sdm_output/chl/subs/chl_pred_hist_subs.Rdata')
+chl_pred_ssp245_30 <- readRDS(file = './sdm_output/chl/subs/chl_pred_ssp245_30_subs.Rdata')
+chl_pred_ssp245_50 <- readRDS(file = './sdm_output/chl/subs/chl_pred_ssp245_50_subs.Rdata')
+chl_pred_ssp245_70 <- readRDS(file = './sdm_output/chl/subs/chl_pred_ssp245_70_subs.Rdata')
 chl_pred_ssp585_30 <- readRDS(file = './sdm_output/chl/subs/chl_pred_ssp585_30_subs.Rdata')
 chl_pred_ssp585_50 <- readRDS(file = './sdm_output/chl/subs/chl_pred_ssp585_50_subs.Rdata')
 chl_pred_ssp585_70 <- readRDS(file = './sdm_output/chl/subs/chl_pred_ssp585_70_subs.Rdata')
@@ -106,34 +121,48 @@ ecoNA_chl_add <- terra::subset(ecoNA, ecoNA$NA_L2CODE %in% eco_chl_code_add)
 
 # fus: hist masked to ecoNA_fus; futures masked to ecoNA_fus_add
 fus_hist_m <- mask(fus_pred_hist, ecoNA_fus)
-fus_30_m <- mask(fus_pred_ssp585_30, ecoNA_fus_add)
-fus_50_m <- mask(fus_pred_ssp585_50, ecoNA_fus_add)
-fus_70_m  <- mask(fus_pred_ssp585_70, ecoNA_fus_add)
+fus_30_245_m <- mask(fus_pred_ssp245_30, ecoNA_fus_add)
+fus_50_245_m <- mask(fus_pred_ssp245_50, ecoNA_fus_add)
+fus_70_245_m  <- mask(fus_pred_ssp245_70, ecoNA_fus_add)
+fus_30_585_m <- mask(fus_pred_ssp585_30, ecoNA_fus_add)
+fus_50_585_m <- mask(fus_pred_ssp585_50, ecoNA_fus_add)
+fus_70_585_m  <- mask(fus_pred_ssp585_70, ecoNA_fus_add)
 
 # cor
 cor_hist_m <- mask(cor_pred_hist, ecoNA_cor)
-cor_30_m <- mask(cor_pred_ssp585_30, ecoNA_cor_add)
-cor_50_m <- mask(cor_pred_ssp585_50, ecoNA_cor_add)
-cor_70_m <- mask(cor_pred_ssp585_70, ecoNA_cor_add)
+cor_30_245_m <- mask(cor_pred_ssp245_30, ecoNA_cor_add)
+cor_50_245_m <- mask(cor_pred_ssp245_50, ecoNA_cor_add)
+cor_70_245_m <- mask(cor_pred_ssp245_70, ecoNA_cor_add)
+cor_30_585_m <- mask(cor_pred_ssp585_30, ecoNA_cor_add)
+cor_50_585_m <- mask(cor_pred_ssp585_50, ecoNA_cor_add)
+cor_70_585_m <- mask(cor_pred_ssp585_70, ecoNA_cor_add)
 
 # ion
 ion_hist_m <- mask(ion_pred_hist, ecoNA_ion)
-ion_30_m <- mask(ion_pred_ssp585_30, ecoNA_ion_add)
-ion_50_m <- mask(ion_pred_ssp585_50, ecoNA_ion_add)
-ion_70_m <- mask(ion_pred_ssp585_70, ecoNA_ion_add)
+ion_30_245_m <- mask(ion_pred_ssp245_30, ecoNA_ion_add)
+ion_50_245_m <- mask(ion_pred_ssp245_50, ecoNA_ion_add)
+ion_70_245_m <- mask(ion_pred_ssp245_70, ecoNA_ion_add)
+ion_30_585_m <- mask(ion_pred_ssp585_30, ecoNA_ion_add)
+ion_50_585_m <- mask(ion_pred_ssp585_50, ecoNA_ion_add)
+ion_70_585_m <- mask(ion_pred_ssp585_70, ecoNA_ion_add)
 
 # ang
 ang_hist_m <- mask(ang_pred_hist, ecoNA_ang)
-ang_30_m <- mask(ang_pred_ssp585_30, ecoNA_ang_add)
-ang_50_m <- mask(ang_pred_ssp585_50, ecoNA_ang_add)
-ang_70_m <- mask(ang_pred_ssp585_70, ecoNA_ang_add)
+ang_30_245_m <- mask(ang_pred_ssp245_30, ecoNA_ang_add)
+ang_50_245_m <- mask(ang_pred_ssp245_50, ecoNA_ang_add)
+ang_70_245_m <- mask(ang_pred_ssp245_70, ecoNA_ang_add)
+ang_30_585_m <- mask(ang_pred_ssp585_30, ecoNA_ang_add)
+ang_50_585_m <- mask(ang_pred_ssp585_50, ecoNA_ang_add)
+ang_70_585_m <- mask(ang_pred_ssp585_70, ecoNA_ang_add)
 
 # chl
 chl_hist_m <- mask(chl_pred_hist, ecoNA_chl)
-chl_30_m <- mask(chl_pred_ssp585_30, ecoNA_chl_add)
-chl_50_m <- mask(chl_pred_ssp585_50, ecoNA_chl_add)
-chl_70_m <- mask(chl_pred_ssp585_70, ecoNA_chl_add)
-
+chl_30_245_m <- mask(chl_pred_ssp245_30, ecoNA_chl_add)
+chl_50_245_m <- mask(chl_pred_ssp245_50, ecoNA_chl_add)
+chl_70_245_m <- mask(chl_pred_ssp245_70, ecoNA_chl_add)
+chl_30_585_m <- mask(chl_pred_ssp585_30, ecoNA_chl_add)
+chl_50_585_m <- mask(chl_pred_ssp585_50, ecoNA_chl_add)
+chl_70_585_m <- mask(chl_pred_ssp585_70, ecoNA_chl_add)
 # Area summarization ------------------------------------------------------
 # Create function 
 summarize_habitat <- function(pred_raster, threshold) {
@@ -208,19 +237,30 @@ compare_suitability <- function(t0_rast, t1_rast, threshold) {
        lat_summary = lat_summary)
 }
 
-compare_suitability(fus_hist_m, fus_70_m, fusPred_threshold_50)
+compare_suitability(fus_hist_m, fus_70_245_m, fusPred_threshold_50)
 
 # COMPLETE SUMMARY
 # List of all inputs ------------------------------------------------------
 
 # Use masked rasters (hist → ecoNA_*, futures → ecoNA_*_add)
-taxa_list <- list(
-  fus = list(hist = fus_hist_m, ssp30 = fus_30_m, ssp50 = fus_50_m, ssp70 = fus_70_m, threshold = fusPred_threshold_50),
-  cor = list(hist = cor_hist_m, ssp30 = cor_30_m, ssp50 = cor_50_m, ssp70 = cor_70_m, threshold = corPred_threshold_50),
-  ion = list(hist = ion_hist_m, ssp30 = ion_30_m, ssp50 = ion_50_m, ssp70 = ion_70_m, threshold = ionPred_threshold_50),
-  ang = list(hist = ang_hist_m, ssp30 = ang_30_m, ssp50 = ang_50_m, ssp70 = ang_70_m, threshold = angPred_threshold_50),
-  chl = list(hist = chl_hist_m, ssp30 = chl_30_m, ssp50 = chl_50_m, ssp70 = chl_70_m, threshold = chlPred_threshold_50)
+# SSP245 LIST
+taxa_list_245 <- list(
+  fus = list(hist = fus_hist_m, ssp30 = fus_30_245_m, ssp50 = fus_50_245_m, ssp70 = fus_70_245_m, threshold = fusPred_threshold_50),
+  cor = list(hist = cor_hist_m, ssp30 = cor_30_245_m, ssp50 = cor_50_245_m, ssp70 = cor_70_245_m, threshold = corPred_threshold_50),
+  ion = list(hist = ion_hist_m, ssp30 = ion_30_245_m, ssp50 = ion_50_245_m, ssp70 = ion_70_245_m, threshold = ionPred_threshold_50),
+  ang = list(hist = ang_hist_m, ssp30 = ang_30_245_m, ssp50 = ang_50_245_m, ssp70 = ang_70_245_m, threshold = angPred_threshold_50),
+  chl = list(hist = chl_hist_m, ssp30 = chl_30_245_m, ssp50 = chl_50_245_m, ssp70 = chl_70_245_m, threshold = chlPred_threshold_50)
 )
+
+# SSP585 LIST
+taxa_list_585 <- list(
+  fus = list(hist = fus_hist_m, ssp30 = fus_30_585_m, ssp50 = fus_50_585_m, ssp70 = fus_70_585_m, threshold = fusPred_threshold_50),
+  cor = list(hist = cor_hist_m, ssp30 = cor_30_585_m, ssp50 = cor_50_585_m, ssp70 = cor_70_585_m, threshold = corPred_threshold_50),
+  ion = list(hist = ion_hist_m, ssp30 = ion_30_585_m, ssp50 = ion_50_585_m, ssp70 = ion_70_585_m, threshold = ionPred_threshold_50),
+  ang = list(hist = ang_hist_m, ssp30 = ang_30_585_m, ssp50 = ang_50_585_m, ssp70 = ang_70_585_m, threshold = angPred_threshold_50),
+  chl = list(hist = chl_hist_m, ssp30 = chl_30_585_m, ssp50 = chl_50_585_m, ssp70 = chl_70_585_m, threshold = chlPred_threshold_50)
+)
+
 
 # Wrapper to summarize all time comparisons per taxon
 # Long format summary function
@@ -288,27 +328,43 @@ summarize_long_format <- function(taxon_code, hist, ssp30, ssp50, ssp70, thresho
 
 
 # Apply to all taxa
-summary_long_df <- purrr::pmap_dfr(
+# SSP245
+summary_long_245_df <- purrr::pmap_dfr(
   list(
-    taxon_code = names(taxa_list),
-    hist = map(taxa_list, "hist"),
-    ssp30 = map(taxa_list, "ssp30"),
-    ssp50 = map(taxa_list, "ssp50"),
-    ssp70 = map(taxa_list, "ssp70"),
-    threshold = map(taxa_list, "threshold")
+    taxon_code = names(taxa_list_245),
+    hist = map(taxa_list_245, "hist"),
+    ssp30 = map(taxa_list_245, "ssp30"),
+    ssp50 = map(taxa_list_245, "ssp50"),
+    ssp70 = map(taxa_list_245, "ssp70"),
+    threshold = map(taxa_list_245, "threshold")
   ),
   summarize_long_format
 )
 
 # View result
-head(summary_long_df)
+head(summary_long_245_df)
+
+# SSP585
+summary_long_585_df <- purrr::pmap_dfr(
+  list(
+    taxon_code = names(taxa_list_585),
+    hist = map(taxa_list_585, "hist"),
+    ssp30 = map(taxa_list_585, "ssp30"),
+    ssp50 = map(taxa_list_585, "ssp50"),
+    ssp70 = map(taxa_list_585, "ssp70"),
+    threshold = map(taxa_list_585, "threshold")
+  ),
+  summarize_long_format
+)
+
+# View result
+head(summary_long_585_df)
 
 # Pivot wide for publication ----------------------------------------------
 
 
-
-# Step 1: Extract t0 summaries (where change == "total")
-df_t0 <- summary_long_df %>%
+# Extract t0 summaries (where change == "total")
+df_245_t0 <- summary_long_245_df %>%
   dplyr::filter(timeseries == "t0", change == "total") %>%
   dplyr::select(taxon, area_km2, median_latitude, mean_latitude, sd_latitude) %>%
   dplyr::rename(
@@ -318,8 +374,8 @@ df_t0 <- summary_long_df %>%
     sd_latitude_t0 = sd_latitude
   )
 
-# Step 2: Extract change values for t1–t3
-df_changes <- summary_long_df %>%
+# Extract change values for t1–t3
+df_245_changes <- summary_long_245_df %>%
   dplyr::filter(timeseries != "t0") %>%
   dplyr::select(taxon, timeseries, change, area_km2) %>%
   pivot_wider(
@@ -328,8 +384,8 @@ df_changes <- summary_long_df %>%
     values_fill = 0
   )
 
-# Step 3: Extract lat summaries for t1–t3 (from any row per group since values are the same per group)
-df_latitudes <- summary_long_df %>%
+# Extract lat summaries for t1–t3 (from any row per group since values are the same per group)
+df_245_latitudes <- summary_long_245_df %>%
   dplyr::filter(timeseries != "t0") %>%
   dplyr::group_by(taxon, timeseries) %>%
   dplyr::slice(1) %>%  # each row per taxon/time has same lat summary, just grab the first
@@ -344,17 +400,71 @@ df_latitudes <- summary_long_df %>%
   dplyr::rename_with(~ paste0(.x, "_t", gsub(".*_", "", .x)), starts_with("sd_latitude"))
 
 # Step 4: Join all together
-summary_wide_df <- df_t0 %>%
-  left_join(df_changes, by = "taxon") %>%
-  left_join(df_latitudes, by = "taxon")
+summary_245_wide_df <- df_245_t0 %>%
+  left_join(df_245_changes, by = "taxon") %>%
+  left_join(df_245_latitudes, by = "taxon") %>% 
+  mutate(ssp = 'ssp245')
+
+#SSP585
+# Extract t0 summaries (where change == "total")
+df_585_t0 <- summary_long_585_df %>%
+  dplyr::filter(timeseries == "t0", change == "total") %>%
+  dplyr::select(taxon, area_km2, median_latitude, mean_latitude, sd_latitude) %>%
+  dplyr::rename(
+    total_area_t0 = area_km2,
+    median_latitude_t0 = median_latitude,
+    mean_latitude_t0 = mean_latitude,
+    sd_latitude_t0 = sd_latitude
+  )
+
+# Extract change values for t1–t3
+df_585_changes <- summary_long_585_df %>%
+  dplyr::filter(timeseries != "t0") %>%
+  dplyr::select(taxon, timeseries, change, area_km2) %>%
+  pivot_wider(
+    names_from = c(timeseries, change),
+    values_from = area_km2,
+    values_fill = 0
+  )
+
+# Extract lat summaries for t1–t3 (from any row per group since values are the same per group)
+df_585_latitudes <- summary_long_585_df %>%
+  dplyr::filter(timeseries != "t0") %>%
+  dplyr::group_by(taxon, timeseries) %>%
+  dplyr::slice(1) %>%  # each row per taxon/time has same lat summary, just grab the first
+  dplyr::ungroup() %>%
+  dplyr::select(taxon, timeseries, median_latitude, mean_latitude, sd_latitude) %>%
+  pivot_wider(
+    names_from = timeseries,
+    values_from = c(median_latitude, mean_latitude, sd_latitude)
+  ) %>%
+  dplyr::rename_with(~ paste0(.x, "_t", gsub(".*_", "", .x)), starts_with("median_latitude")) %>%
+  dplyr::rename_with(~ paste0(.x, "_t", gsub(".*_", "", .x)), starts_with("mean_latitude")) %>%
+  dplyr::rename_with(~ paste0(.x, "_t", gsub(".*_", "", .x)), starts_with("sd_latitude"))
+
+# Step 4: Join all together
+summary_585_wide_df <- df_585_t0 %>%
+  left_join(df_585_changes, by = "taxon") %>%
+  left_join(df_585_latitudes, by = "taxon") %>% 
+  mutate(ssp = 'ssp585')
+
 
 # View result
+# Bind SSP245 and SSP585 together
+summary_wide_df <- rbind(summary_245_wide_df, summary_585_wide_df)
 print(summary_wide_df)
 
 
 # Save for publication ----------------------------------------------------
 # Save as CSV
 
-write.csv(summary_wide_df, file = './sdm_output/summ_area/summary_wide_df_v5.csv')
+write.csv(summary_wide_df, file = './sdm_output/summ_area/summary_wide_df_ssp245and585.csv')
+
+
+# Plotting results --------------------------------------------------------
+summary_long_245_df <- summary_long_245_df %>% mutate(ssp = 'ssp245')
+summary_long_585_df <- summary_long_585_df %>% mutate(ssp = 'ssp585')
+
+combined_df <- rbind(summary_long_245_df, summary_long_585_df)
 
 
