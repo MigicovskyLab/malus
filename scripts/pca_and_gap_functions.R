@@ -266,6 +266,7 @@ ecospat.plot.niche.pair <- function(z1, z2,
 # Gap analysis functions --------------------------------------------------
 
 #### Gap Analysis functions ####
+# NO MIGRATION
 calculate_srsin <- function(pred, pa, occ, threshold) {
   r_masked <- pred > threshold
   names(r_masked) <- "binary"
@@ -335,3 +336,92 @@ calculate_ersin <- function(pred, threshold, eco_vec, hist_masked, pa_mask_resam
   return((length(overlap_codes) / length(eco_hist_codes)) * 100)
 }
 
+# PREFECT MIGRATION
+calculate_srsin_migration <- function(pred, pa, occ, threshold) {
+  r_masked <- pred > threshold
+  names(r_masked) <- "binary"
+  r_pa <- terra::mask(pred, pa) > threshold
+  names(r_pa) <- "binary"
+  
+  occ_pred <- terra::extract(r_masked, occ) %>%
+    as.data.frame() %>%
+    dplyr::filter(binary == 1)
+  
+  occ_pa <- terra::extract(r_pa, occ) %>%
+    as.data.frame() %>%
+    dplyr::filter(binary == 1)
+  
+  if (nrow(occ_pred) == 0) return(0)
+  return(nrow(occ_pa) / nrow(occ_pred) * 100)
+}
+
+calculate_grsin_migration <- function(pred, pa, threshold) {
+  r_masked <- pred > threshold
+  names(r_masked) <- "binary"
+  
+  area_all <- terra::expanse(r_masked, byValue = TRUE, unit = "km") %>%
+    as.data.frame() %>%
+    dplyr::filter(value == 1) %>%
+    dplyr::summarise(area = sum(area, na.rm = TRUE)) %>%
+    dplyr::pull(area)
+  
+  r_pa <- (pred > threshold) & (pa == 1)
+  names(r_pa) <- "binary"
+  
+  area_pa <- terra::expanse(r_pa, byValue = TRUE, unit = "km") %>%
+    as.data.frame() %>%
+    dplyr::filter(value == 1) %>%
+    dplyr::summarise(area = sum(area, na.rm = TRUE)) %>%
+    dplyr::pull(area)
+  
+  if (is.na(area_all) || area_all == 0) return(0)
+  return(area_pa / area_all * 100)
+}
+
+calculate_ersin_migration <- function(pred, pa, eco_all, threshold, eco_hist = NULL) {
+  # Future suitable area and protected subset
+  r_masked <- pred > threshold
+  names(r_masked) <- "binary"
+  r_pa <- (pred > threshold) & (pa == 1)
+  names(r_pa) <- "binary"
+  
+  # Reference ecoregions = all FUTURE suitable
+  ref_codes <- terra::mask(eco_all, r_masked) %>%
+    terra::values() %>%
+    as.vector() %>%
+    unique() %>%
+    stats::na.omit() %>%
+    sort()
+  
+  # Protected ecoregions = FUTURE suitable + protected
+  pa_codes <- terra::mask(eco_all, r_pa) %>%
+    terra::values() %>%
+    as.vector() %>%
+    unique() %>%
+    stats::na.omit() %>%
+    sort()
+  
+  if (length(ref_codes) == 0) {
+    return(list(value = 0, new_ecoregions = NULL))
+  }
+  
+  ersin <- length(intersect(ref_codes, pa_codes)) / length(ref_codes) * 100
+  
+  # Optional: identify new ecoregions relative to historical-suitable set
+  new_codes <- NULL
+  if (!is.null(eco_hist)) {
+    hist_codes <- terra::mask(eco_hist, eco_hist != 0) %>%
+      terra::values() %>%
+      as.vector() %>%
+      unique() %>%
+      stats::na.omit() %>%
+      sort()
+    new_codes <- setdiff(ref_codes, hist_codes)
+  }
+  
+  return(list(value = ersin, new_ecoregions = new_codes))
+}
+
+calculate_fcsin_migration <- function(SRSin, GRSin, ERSin) {
+  return(mean(c(SRSin, GRSin, ERSin)))
+}
