@@ -781,7 +781,11 @@ species_names <- c("Malus coronaria", "Malus fusca", "Malus ioensis", "Malus ang
 
 
 #### Run Gap Analysis ####
+# Note there are two seperate gap analyses!!
+# 1) Assumes NO Migration of species into areas that were not historically suitable
+# 2) Assumes PERFECT migration of species into areas that become suitable under future scenarios
 
+# NO MIGRATION
 full_result <- list() #initialize list
 
 for (index in seq_along(species_list)) {
@@ -870,7 +874,132 @@ for (index in seq_along(species_list)) {
 all_species_results <- bind_rows(full_result)
 print(all_species_results)
 
-message("** Finished running gap analysis: ", date())
+message("** Finished running NO MIGRATION gap analysis: ", date())
+
+# PREFECCT MIGRATION
+
+full_result_migration <- list()
+Start_all <- Sys.time()
+
+for (index in seq_along(species_list)) {
+  sp_code <- species_list[index]
+  sp_name <- species_names[index]
+  
+  cat("\n==== Running MIGRATION gap analysis for:", sp_code, "====\n")
+  Start <- Sys.time()
+  
+  base_path   <- file.path("./sdm_output", sp_code, "subs")
+  thresh_path <- file.path(base_path, "threshold")
+  occ_path    <- file.path("./occ_data", sp_code)
+  
+  pa_raster <- terra::rast("./gap_analysis/pa_raster_us_can.tif")
+  eco_vec   <- readRDS(file.path("./maps/eco_regions", paste0("ecoNA_", sp_code, ".Rdata")))
+  
+  occ <- readRDS(file.path(occ_path, paste0("occThin_", sp_code, ".Rdata")))
+  if (!inherits(occ, "SpatVector")) occ <- terra::vect(occ)
+  
+  eco_mask_pts <- terra::intersect(eco_vec, occ)
+  eco_occ      <- unique(eco_mask_pts$NA_L2CODE)
+  eco_vec_crop <- eco_vec[eco_vec$NA_L2CODE %in% eco_occ, ]
+  
+  preds <- list(
+    hist       = readRDS(file.path(base_path, paste0(sp_code, "_pred_hist_subs.Rdata"))),
+    ssp245_30  = readRDS(file.path(base_path, paste0(sp_code, "_pred_ssp245_30_subs.Rdata"))),
+    ssp245_50  = readRDS(file.path(base_path, paste0(sp_code, "_pred_ssp245_50_subs.Rdata"))),
+    ssp245_70  = readRDS(file.path(base_path, paste0(sp_code, "_pred_ssp245_70_subs.Rdata"))),
+    ssp585_30  = readRDS(file.path(base_path, paste0(sp_code, "_pred_ssp585_30_subs.Rdata"))),
+    ssp585_50  = readRDS(file.path(base_path, paste0(sp_code, "_pred_ssp585_50_subs.Rdata"))),
+    ssp585_70  = readRDS(file.path(base_path, paste0(sp_code, "_pred_ssp585_70_subs.Rdata")))
+  )
+  
+  thresholds <- list(
+    low  = readRDS(file.path(thresh_path, paste0(sp_code, "Pred_threshold_1_subs.Rdata"))),
+    mod  = readRDS(file.path(thresh_path, paste0(sp_code, "Pred_threshold_10_subs.Rdata"))),
+    high = readRDS(file.path(thresh_path, paste0(sp_code, "Pred_threshold_50_subs.Rdata")))
+  )
+  
+  # Crop predictions to species eco extent
+  preds <- lapply(preds, function(x) terra::crop(x, eco_vec_crop, mask = TRUE))
+  template <- preds[[1]]
+  
+  # PA mask and historical binary mask (for reporting "new ecoregions")
+  pa_mask_resampled <- terra::resample(pa_raster == 1, template, method = "near")
+  # Create a binary raster of historical high suitability
+  hist_masked <- preds[["hist"]] > thresholds[["high"]]
+  # Resample to match the template resolution/extent
+  hist_masked <- terra::resample(hist_masked, template, method = "near")
+  
+  # Load Level II ecoregions vector that spans NA
+  eco_dir <- "./maps/eco_regions/na_cec_eco_l2"
+  
+  # Read full Level II ecoregions as a vector layer
+  eco_vec_full <- terra::vect(file.path(eco_dir, "NA_CEC_Eco_Level2.shp"))
+  # Attributes should include NA_L2CODE and NA_L2NAME)
+  
+  # Project to the raster template CRS
+  if (!terra::same.crs(eco_vec_full, template)) {
+    eco_vec_full <- terra::project(eco_vec_full, terra::crs(template))
+  }
+  
+  # (Optional) fix geometries if needed
+  # eco_vec_full <- terra::makeValid(eco_vec_full)
+  
+  # Rasterize full ecoregions on the same resolution/extent as 'template'
+  eco_rast_full <- terra::rasterize(eco_vec_full, template, field = "NA_L2CODE")
+  
+  # Historical-suitable ecoregions (to identify “new” ones under migration)
+  eco_hist <- terra::mask(eco_rast_full, hist_masked)
+  
+  out <- list()
+  for (pname in names(preds)) {
+    for (thresh_name in "high") {  # only analyze high suitability
+      th <- thresholds[[thresh_name]]
+      pr <- preds[[pname]]
+      
+      cat("[MIGRATION] Processing:", sp_code, pname, thresh_name, "\n")
+      
+      SRSin <- calculate_srsin_migration(pr, pa_mask_resampled, occ, th)
+      GRSin <- calculate_grsin_migration(pr, pa_mask_resampled, th)
+      ERobj <- calculate_ersin_migration(pr, pa_mask_resampled, eco_rast_full, th, eco_hist = eco_hist)
+      
+      ERSin <- ERobj$value
+      FCSin <- calculate_fcsin_migration(SRSin, GRSin, ERSin)
+      
+      out[[paste(pname, thresh_name, sep = "_")]] <- tibble(
+        mode        = "migration",
+        species     = sp_name,
+        sp_code     = sp_code,
+        ssp         = ifelse(pname == 'hist', 'historical', ifelse(grepl('245', pname), '245', '585')),
+        period      = dplyr::case_when(
+          pname == 'hist'       ~ 2000,
+          pname == 'ssp245_30'  ~ 2030,
+          pname == 'ssp245_50'  ~ 2050,
+          pname == 'ssp245_70'  ~ 2070,
+          pname == 'ssp585_30'  ~ 2030,
+          pname == 'ssp585_50'  ~ 2050,
+          pname == 'ssp585_70'  ~ 2070
+        ),
+        suitability = thresh_name,
+        SRSin = SRSin,
+        GRSin = GRSin,
+        ERSin = ERSin,
+        FCSin = FCSin,
+        # Keep the codes for auditing
+        new_ecoregions = list(ERobj$new_ecoregions)
+      )
+    }
+  }
+  
+  full_result_migration[[sp_code]] <- dplyr::bind_rows(out)
+  cat("Finished:", sp_code, " in", round(as.numeric(difftime(Sys.time(), Start, units = "mins")), 2), "min\n")
+}
+
+migration_results <- dplyr::bind_rows(full_result_migration)
+print(migration_results)
+
+cat("\nAll done (MIGRATION). Total minutes:",
+    round(as.numeric(difftime(Sys.time(), Start_all, units = "mins")), 2), "\n")
+
 
 # END ---------------------------------------------------------------------
 # See other exploratory and data cleaning/prep scripts in the "scripts" folder
