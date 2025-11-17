@@ -92,7 +92,7 @@ plot_gap_by_metric <- function(df, sp, ssp_sel = "585", include_historical = TRU
           rh <- rows %>% dplyr::filter(ssp == "historical")
         
         if (nrow(rh) > 0) {
-          y <- rh[[met]][1]                 # single valuefixes length mismatch
+          y <- rh[[met]][1]                 # single value fixes length mismatch
           segments(j, 0, j, y, lwd = 6, col = col)
           points(j, y, pch = 15, cex = 3.5, col = col)
         }
@@ -161,7 +161,7 @@ for (ssp in c("585","245")) {
 
 # Legends -----------------------------------------------------------------
 # Point legends
-png("C:/Users/terre/Documents/Acadia/Malus Project/statistical analysis/gap_analysis/migration_legend.png", width = 2.5*1.33, height = 1.5*1.33, res = 300, units = 'in')
+png("C:/Users/terre/Documents/Acadia/Malus Project/statistical analysis/gap_analysis/migration_legend.png", width = 2.5*2.2, height = 1.5*2.2, res = 300, units = 'in')
   
   par(mar = c(0, 0, 0, 0))
   plot.new()
@@ -171,17 +171,17 @@ png("C:/Users/terre/Documents/Acadia/Malus Project/statistical analysis/gap_anal
     pch = c(15, 1, 19),          
     pt.bg = c("black", "black", "black"), 
     col = c("black", "black", "black"),   
-    pt.cex = 0.75*1.33,
+    pt.cex = 0.75*2.2,
     bty = "n",
     horiz = FALSE,
-    cex = 0.75*1.33,
+    cex = 0.75*2.2,
     title = "Migration scenario"
   )
   
   dev.off()
 
 # Metric colours
-png("C:/Users/terre/Documents/Acadia/Malus Project/statistical analysis/gap_analysis/gap_legend.png", width = 2.5*1.33, height = 1.5*1.33, res = 300, units = 'in')
+png("C:/Users/terre/Documents/Acadia/Malus Project/statistical analysis/gap_analysis/gap_legend.png", width = 2.5*2.2, height = 1.5*2.2, res = 300, units = 'in')
 
 metric_cols <- c("#A1D99B", "#7FCDBB", "#41AE76", "#0868AC")
 metric_names <- c("SRSin", "GRSin", "ERSin", "FCSin")
@@ -195,14 +195,14 @@ legend(
   border = NA,
   ncol = 1,
   bty = "n",
-  cex = 0.75*1.33,
+  cex = 0.75*2.2,
   title = "In situ gap metric"
 )
 
 dev.off()
 
 # Conservation thresholds
-png("C:/Users/terre/Documents/Acadia/Malus Project/statistical analysis/gap_analysis/threshold_legend.png", width = 2.5*1.33, height = 1.5*1.33, res = 300, units = 'in')
+png("C:/Users/terre/Documents/Acadia/Malus Project/statistical analysis/gap_analysis/threshold_legend.png", width = 2.5*2.2, height = 1.5*2.2, res = 300, units = 'in')
 
 par(mar = c(0, 0, 0, 0))
 plot.new()
@@ -215,7 +215,7 @@ legend("right",
          "SC = Sufficiently conserved (FCSin ≥ 75)"
        ),
        bty = "n",
-       cex = 0.75*1.33
+       cex = 0.75*2.2
        # title = "Conservation priority categories"
 )
 
@@ -236,14 +236,14 @@ make_grid_for_ssp <- function(ssp_dir) {
   g_chl <- read_grob(file.path(ssp_dir, "gap_analysis_chl.png"))
   
   # legends (stacked vertically in the 6th cell)
-  g_leg_mig <- read_grob(file.path(dirname(ssp_dir), "migration_legend.png"))
-  g_leg_gap <- read_grob(file.path(dirname(ssp_dir), "gap_legend.png"))
-  g_leg_the <- read_grob(file.path(dirname(ssp_dir), "threshold_legend.png"))
-  g_leg_v   <- arrangeGrob(g_leg_mig, g_leg_gap, g_leg_the, ncol = 2, heights = c(1, 1, 1))
+  # g_leg_mig <- read_grob(file.path(dirname(ssp_dir), "migration_legend.png"))
+  # g_leg_gap <- read_grob(file.path(dirname(ssp_dir), "gap_legend.png"))
+  # g_leg_the <- read_grob(file.path(dirname(ssp_dir), "threshold_legend.png"))
+  # g_leg_v   <- arrangeGrob(g_leg_mig, g_leg_gap, g_leg_the, ncol = 2, heights = c(1, 1, 1))
   
   grid <- arrangeGrob(g_fus, g_cor, g_ion,
-                      g_ang, g_chl, g_leg_v,
-                      ncol = 2,
+                      g_ang, g_chl,
+                      ncol = 1,
                       padding = unit(-1.2, "line"))
   grid
 }
@@ -251,8 +251,8 @@ make_grid_for_ssp <- function(ssp_dir) {
 # Example: build and save the SSP585 composite
 ssp585_dir <- "C:/Users/terre/Documents/Acadia/Malus Project/statistical analysis/gap_analysis/SSP585"
 g <- make_grid_for_ssp(ssp585_dir)
-ggsave(file.path(ssp585_dir, "gap_analysis_grid_SSP585.png"),
-       g, width = 18, height = 9, dpi = 300)
+ggsave(file.path(ssp585_dir, "gap_analysis_grid_SSP585_v2.png"),
+       g, width = 18, height = 27, dpi = 300)
 
 
 
