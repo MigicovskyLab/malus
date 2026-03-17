@@ -352,7 +352,7 @@ par(
 )
 
 # geographic extent in lon/lat
-cor.ext <- terra::ext(-113, -61, 25, 70)
+cor.ext <- terra::ext(-113, -59, 25, 65)
 
 # projected extent for plotting
 cor.zoom.vect <- terra::as.polygons(cor.ext, crs = "EPSG:4326")
@@ -419,7 +419,7 @@ add_lonlat_labels_box(
   ext_ll = cor.ext,
   ext_map = cor.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-100, -60, by = 10),
+  lon_ticks = seq(-110, -60, by = 10),
   lat_ticks = seq(30, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -442,7 +442,7 @@ par(
 )
 
 # geographic extent in lon/lat
-cor.ext <- terra::ext(-108, -58, 25, 65)
+cor.ext <- terra::ext(-113, -59, 25, 65)
 
 # projected extent for plotting
 cor.zoom.vect <- terra::as.polygons(cor.ext, crs = "EPSG:4326")
@@ -509,7 +509,7 @@ add_lonlat_labels_box(
   ext_ll = cor.ext,
   ext_map = cor.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-100, -60, by = 10),
+  lon_ticks = seq(-110, -60, by = 10),
   lat_ticks = seq(30, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -532,7 +532,7 @@ par(
 )
 
 # geographic extent in lon/lat
-cor.ext <- terra::ext(-108, -58, 25, 65)
+cor.ext <- terra::ext(-113, -59, 25, 65)
 
 # projected extent for plotting
 cor.zoom.vect <- terra::as.polygons(cor.ext, crs = "EPSG:4326")
@@ -599,7 +599,7 @@ add_lonlat_labels_box(
   ext_ll = cor.ext,
   ext_map = cor.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-100, -60, by = 10),
+  lon_ticks = seq(-110, -60, by = 10),
   lat_ticks = seq(30, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -622,7 +622,7 @@ par(
 )
 
 # geographic extent in lon/lat
-cor.ext <- terra::ext(-108, -58, 25, 65)
+cor.ext <- terra::ext(-113, -59, 25, 65)
 
 # projected extent for plotting
 cor.zoom.vect <- terra::as.polygons(cor.ext, crs = "EPSG:4326")
@@ -689,7 +689,7 @@ add_lonlat_labels_box(
   ext_ll = cor.ext,
   ext_map = cor.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-100, -60, by = 10),
+  lon_ticks = seq(-110, -60, by = 10),
   lat_ticks = seq(30, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -713,7 +713,7 @@ par(
 )
 
 # geographic extent in lon/lat
-cor.ext <- terra::ext(-108, -58, 25, 65)
+cor.ext <- terra::ext(-113, -59, 25, 65)
 
 # projected extent for plotting
 cor.zoom.vect <- terra::as.polygons(cor.ext, crs = "EPSG:4326")
@@ -780,7 +780,7 @@ add_lonlat_labels_box(
   ext_ll = cor.ext,
   ext_map = cor.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-100, -60, by = 10),
+  lon_ticks = seq(-110, -60, by = 10),
   lat_ticks = seq(30, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -803,7 +803,7 @@ par(
 )
 
 # geographic extent in lon/lat
-cor.ext <- terra::ext(-108, -58, 25, 65)
+cor.ext <- terra::ext(-113, -59, 25, 65)
 
 # projected extent for plotting
 cor.zoom.vect <- terra::as.polygons(cor.ext, crs = "EPSG:4326")
@@ -870,7 +870,7 @@ add_lonlat_labels_box(
   ext_ll = cor.ext,
   ext_map = cor.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-100, -60, by = 10),
+  lon_ticks = seq(-110, -60, by = 10),
   lat_ticks = seq(30, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -893,7 +893,7 @@ par(
 )
 
 # geographic extent in lon/lat
-cor.ext <- terra::ext(-108, -58, 25, 65)
+cor.ext <- terra::ext(-113, -59, 25, 65)
 
 # projected extent for plotting
 cor.zoom.vect <- terra::as.polygons(cor.ext, crs = "EPSG:4326")
@@ -960,7 +960,7 @@ add_lonlat_labels_box(
   ext_ll = cor.ext,
   ext_map = cor.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-100, -60, by = 10),
+  lon_ticks = seq(-110, -60, by = 10),
   lat_ticks = seq(30, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -984,7 +984,7 @@ par(
 )
 
 # geo)graphic extent in lon/lat
-fus.ext <- terra::ext(-168, -125, 35, 70)
+fus.ext <- terra::ext(-172, -125, 35, 70)
 
 # projected extent for plotting
 fus.zoom.vect <- terra::as.polygons(fus.ext, crs = "EPSG:4326")
@@ -1051,7 +1051,7 @@ add_lonlat_labels_box(
   ext_ll = fus.ext,
   ext_map = fus.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-160, -120, by = 10),
+  lon_ticks = seq(-170, -120, by = 10),
   lat_ticks = seq(40, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -1074,7 +1074,7 @@ par(
 )
 
 # geographic extent in lon/lat
-fus.ext <- terra::ext(-168, -125, 35, 70)
+fus.ext <- terra::ext(-172, -125, 35, 70)
 
 # projected extent for plotting
 fus.zoom.vect <- terra::as.polygons(fus.ext, crs = "EPSG:4326")
@@ -1141,7 +1141,7 @@ add_lonlat_labels_box(
   ext_ll = fus.ext,
   ext_map = fus.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-160, -120, by = 10),
+  lon_ticks = seq(-170, -120, by = 10),
   lat_ticks = seq(40, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -1164,7 +1164,7 @@ par(
 )
 
 # geographic extent in lon/lat
-fus.ext <- terra::ext(-168, -125, 35, 70)
+fus.ext <- terra::ext(-172, -125, 35, 70)
 
 # projected extent for plotting
 fus.zoom.vect <- terra::as.polygons(fus.ext, crs = "EPSG:4326")
@@ -1231,7 +1231,7 @@ add_lonlat_labels_box(
   ext_ll = fus.ext,
   ext_map = fus.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-160, -120, by = 10),
+  lon_ticks = seq(-170, -120, by = 10),
   lat_ticks = seq(40, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -1254,7 +1254,7 @@ par(
 )
 
 # geographic extent in lon/lat
-fus.ext <- terra::ext(-168, -125, 35, 70)
+fus.ext <- terra::ext(-172, -125, 35, 70)
 
 # projected extent for plotting
 fus.zoom.vect <- terra::as.polygons(fus.ext, crs = "EPSG:4326")
@@ -1321,7 +1321,7 @@ add_lonlat_labels_box(
   ext_ll = fus.ext,
   ext_map = fus.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-160, -120, by = 10),
+  lon_ticks = seq(-170, -120, by = 10),
   lat_ticks = seq(40, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -1345,7 +1345,7 @@ par(
 )
 
 # geographic extent in lon/lat
-fus.ext <- terra::ext(-168, -125, 35, 70)
+fus.ext <- terra::ext(-172, -125, 35, 70)
 
 # projected extent for plotting
 fus.zoom.vect <- terra::as.polygons(fus.ext, crs = "EPSG:4326")
@@ -1412,7 +1412,7 @@ add_lonlat_labels_box(
   ext_ll = fus.ext,
   ext_map = fus.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-160, -120, by = 10),
+  lon_ticks = seq(-170, -120, by = 10),
   lat_ticks = seq(40, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -1435,7 +1435,7 @@ par(
 )
 
 # geographic extent in lon/lat
-fus.ext <- terra::ext(-168, -125, 35, 70)
+fus.ext <- terra::ext(-172, -125, 35, 70)
 
 # projected extent for plotting
 fus.zoom.vect <- terra::as.polygons(fus.ext, crs = "EPSG:4326")
@@ -1502,7 +1502,7 @@ add_lonlat_labels_box(
   ext_ll = fus.ext,
   ext_map = fus.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-160, -120, by = 10),
+  lon_ticks = seq(-170, -120, by = 10),
   lat_ticks = seq(40, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -1525,7 +1525,7 @@ par(
 )
 
 # geographic extent in lon/lat
-fus.ext <- terra::ext(-168, -125, 35, 70)
+fus.ext <- terra::ext(-172, -125, 35, 70)
 
 # projected extent for plotting
 fus.zoom.vect <- terra::as.polygons(fus.ext, crs = "EPSG:4326")
@@ -1592,7 +1592,7 @@ add_lonlat_labels_box(
   ext_ll = fus.ext,
   ext_map = fus.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-160, -120, by = 10),
+  lon_ticks = seq(-170, -120, by = 10),
   lat_ticks = seq(40, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -1617,7 +1617,7 @@ par(
 )
 
 # geographic extent in lon/lat
-ion.ext <- terra::ext(-108, -58, 25, 65)
+ion.ext <- terra::ext(-113, -59, 25, 65)
 
 # projected extent for plotting
 ion.zoom.vect <- terra::as.polygons(ion.ext, crs = "EPSG:4326")
@@ -1684,7 +1684,7 @@ add_lonlat_labels_box(
   ext_ll = ion.ext,
   ext_map = ion.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-100, -60, by = 10),
+  lon_ticks = seq(-110, -60, by = 10),
   lat_ticks = seq(30, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -1707,7 +1707,7 @@ par(
 )
 
 # geographic extent in lon/lat
-ion.ext <- terra::ext(-108, -58, 25, 65)
+ion.ext <- terra::ext(-113, -59, 25, 65)
 
 # projected extent for plotting
 ion.zoom.vect <- terra::as.polygons(ion.ext, crs = "EPSG:4326")
@@ -1774,7 +1774,7 @@ add_lonlat_labels_box(
   ext_ll = ion.ext,
   ext_map = ion.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-100, -60, by = 10),
+  lon_ticks = seq(-110, -60, by = 10),
   lat_ticks = seq(30, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -1797,7 +1797,7 @@ par(
 )
 
 # geographic extent in lon/lat
-ion.ext <- terra::ext(-108, -58, 25, 65)
+ion.ext <- terra::ext(-113, -59, 25, 65)
 
 # projected extent for plotting
 ion.zoom.vect <- terra::as.polygons(ion.ext, crs = "EPSG:4326")
@@ -1864,7 +1864,7 @@ add_lonlat_labels_box(
   ext_ll = ion.ext,
   ext_map = ion.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-100, -60, by = 10),
+  lon_ticks = seq(-110, -60, by = 10),
   lat_ticks = seq(30, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -1887,7 +1887,7 @@ par(
 )
 
 # geographic extent in lon/lat
-ion.ext <- terra::ext(-108, -58, 25, 65)
+ion.ext <- terra::ext(-113, -59, 25, 65)
 
 # projected extent for plotting
 ion.zoom.vect <- terra::as.polygons(ion.ext, crs = "EPSG:4326")
@@ -1954,7 +1954,7 @@ add_lonlat_labels_box(
   ext_ll = ion.ext,
   ext_map = ion.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-100, -60, by = 10),
+  lon_ticks = seq(-110, -60, by = 10),
   lat_ticks = seq(30, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -1978,7 +1978,7 @@ par(
 )
 
 # geographic extent in lon/lat
-ion.ext <- terra::ext(-108, -58, 25, 65)
+ion.ext <- terra::ext(-113, -59, 25, 65)
 
 # projected extent for plotting
 ion.zoom.vect <- terra::as.polygons(ion.ext, crs = "EPSG:4326")
@@ -2045,7 +2045,7 @@ add_lonlat_labels_box(
   ext_ll = ion.ext,
   ext_map = ion.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-100, -60, by = 10),
+  lon_ticks = seq(-110, -60, by = 10),
   lat_ticks = seq(30, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -2068,7 +2068,7 @@ par(
 )
 
 # geographic extent in lon/lat
-ion.ext <- terra::ext(-108, -58, 25, 65)
+ion.ext <- terra::ext(-113, -59, 25, 65)
 
 # projected extent for plotting
 ion.zoom.vect <- terra::as.polygons(ion.ext, crs = "EPSG:4326")
@@ -2135,7 +2135,7 @@ add_lonlat_labels_box(
   ext_ll = ion.ext,
   ext_map = ion.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-100, -60, by = 10),
+  lon_ticks = seq(-110, -60, by = 10),
   lat_ticks = seq(30, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -2158,7 +2158,7 @@ par(
 )
 
 # geographic extent in lon/lat
-ion.ext <- terra::ext(-108, -58, 25, 65)
+ion.ext <- terra::ext(-113, -59, 25, 65)
 
 # projected extent for plotting
 ion.zoom.vect <- terra::as.polygons(ion.ext, crs = "EPSG:4326")
@@ -2225,7 +2225,7 @@ add_lonlat_labels_box(
   ext_ll = ion.ext,
   ext_map = ion.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-100, -60, by = 10),
+  lon_ticks = seq(-110, -60, by = 10),
   lat_ticks = seq(30, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -2249,7 +2249,7 @@ par(
 )
 
 # geographic extent in lon/lat
-ang.ext <- terra::ext(-108, -58, 25, 65)
+ang.ext <- terra::ext(-113, -59, 25, 65)
 
 # projected extent for plotting
 ang.zoom.vect <- terra::as.polygons(ang.ext, crs = "EPSG:4326")
@@ -2316,7 +2316,7 @@ add_lonlat_labels_box(
   ext_ll = ang.ext,
   ext_map = ang.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-100, -60, by = 10),
+  lon_ticks = seq(-110, -60, by = 10),
   lat_ticks = seq(30, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -2336,7 +2336,7 @@ par(
 )
 
 # geographic extent in lon/lat
-ion.ext <- terra::ext(-108, -58, 25, 65)
+ion.ext <- terra::ext(-113, -59, 25, 65)
 
 # projected extent for plotting
 ion.zoom.vect <- terra::as.polygons(ion.ext, crs = "EPSG:4326")
@@ -2403,7 +2403,7 @@ add_lonlat_labels_box(
   ext_ll = ion.ext,
   ext_map = ion.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-100, -60, by = 10),
+  lon_ticks = seq(-110, -60, by = 10),
   lat_ticks = seq(30, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -2425,7 +2425,7 @@ par(
 )
 
 # geographic extent in lon/lat
-ang.ext <- terra::ext(-108, -58, 25, 65)
+ang.ext <- terra::ext(-113, -59, 25, 65)
 
 # projected extent for plotting
 ang.zoom.vect <- terra::as.polygons(ang.ext, crs = "EPSG:4326")
@@ -2492,7 +2492,7 @@ add_lonlat_labels_box(
   ext_ll = ang.ext,
   ext_map = ang.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-100, -60, by = 10),
+  lon_ticks = seq(-110, -60, by = 10),
   lat_ticks = seq(30, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -2515,7 +2515,7 @@ par(
 )
 
 # geographic extent in lon/lat
-ang.ext <- terra::ext(-108, -58, 25, 65)
+ang.ext <- terra::ext(-113, -59, 25, 65)
 
 # projected extent for plotting
 ang.zoom.vect <- terra::as.polygons(ang.ext, crs = "EPSG:4326")
@@ -2582,7 +2582,7 @@ add_lonlat_labels_box(
   ext_ll = ang.ext,
   ext_map = ang.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-100, -60, by = 10),
+  lon_ticks = seq(-110, -60, by = 10),
   lat_ticks = seq(30, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -2605,7 +2605,7 @@ par(
 )
 
 # geographic extent in lon/lat
-ang.ext <- terra::ext(-108, -58, 25, 65)
+ang.ext <- terra::ext(-113, -59, 25, 65)
 
 # projected extent for plotting
 ang.zoom.vect <- terra::as.polygons(ang.ext, crs = "EPSG:4326")
@@ -2672,7 +2672,7 @@ add_lonlat_labels_box(
   ext_ll = ang.ext,
   ext_map = ang.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-100, -60, by = 10),
+  lon_ticks = seq(-110, -60, by = 10),
   lat_ticks = seq(30, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -2696,7 +2696,7 @@ par(
 )
 
 # geographic extent in lon/lat
-ang.ext <- terra::ext(-108, -58, 25, 65)
+ang.ext <- terra::ext(-113, -59, 25, 65)
 
 # projected extent for plotting
 ang.zoom.vect <- terra::as.polygons(ang.ext, crs = "EPSG:4326")
@@ -2763,7 +2763,7 @@ add_lonlat_labels_box(
   ext_ll = ang.ext,
   ext_map = ang.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-100, -60, by = 10),
+  lon_ticks = seq(-110, -60, by = 10),
   lat_ticks = seq(30, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -2786,7 +2786,7 @@ par(
 )
 
 # geographic extent in lon/lat
-ang.ext <- terra::ext(-108, -58, 25, 65)
+ang.ext <- terra::ext(-113, -59, 25, 65)
 
 # projected extent for plotting
 ang.zoom.vect <- terra::as.polygons(ang.ext, crs = "EPSG:4326")
@@ -2853,7 +2853,7 @@ add_lonlat_labels_box(
   ext_ll = ang.ext,
   ext_map = ang.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-100, -60, by = 10),
+  lon_ticks = seq(-110, -60, by = 10),
   lat_ticks = seq(30, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -2876,7 +2876,7 @@ par(
 )
 
 # geographic extent in lon/lat
-ang.ext <- terra::ext(-108, -58, 25, 65)
+ang.ext <- terra::ext(-113, -59, 25, 65)
 
 # projected extent for plotting
 ang.zoom.vect <- terra::as.polygons(ang.ext, crs = "EPSG:4326")
@@ -2943,7 +2943,7 @@ add_lonlat_labels_box(
   ext_ll = ang.ext,
   ext_map = ang.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-100, -60, by = 10),
+  lon_ticks = seq(-110, -60, by = 10),
   lat_ticks = seq(30, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -2968,7 +2968,7 @@ par(
 )
 
 # geographic extent in lon/lat
-chl.ext <- terra::ext(-108, -58, 25, 65)
+chl.ext <- terra::ext(-113, -59, 25, 65)
 
 # projected extent for plotting
 chl.zoom.vect <- terra::as.polygons(chl.ext, crs = "EPSG:4326")
@@ -3035,7 +3035,7 @@ add_lonlat_labels_box(
   ext_ll = chl.ext,
   ext_map = chl.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-100, -60, by = 10),
+  lon_ticks = seq(-110, -60, by = 10),
   lat_ticks = seq(30, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -3058,7 +3058,7 @@ par(
 )
 
 # geographic extent in lon/lat
-chl.ext <- terra::ext(-108, -58, 25, 65)
+chl.ext <- terra::ext(-113, -59, 25, 65)
 
 # projected extent for plotting
 chl.zoom.vect <- terra::as.polygons(chl.ext, crs = "EPSG:4326")
@@ -3125,7 +3125,7 @@ add_lonlat_labels_box(
   ext_ll = chl.ext,
   ext_map = chl.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-100, -60, by = 10),
+  lon_ticks = seq(-110, -60, by = 10),
   lat_ticks = seq(30, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -3148,7 +3148,7 @@ par(
 )
 
 # geographic extent in lon/lat
-chl.ext <- terra::ext(-108, -58, 25, 65)
+chl.ext <- terra::ext(-113, -59, 25, 65)
 
 # projected extent for plotting
 chl.zoom.vect <- terra::as.polygons(chl.ext, crs = "EPSG:4326")
@@ -3215,7 +3215,7 @@ add_lonlat_labels_box(
   ext_ll = chl.ext,
   ext_map = chl.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-100, -60, by = 10),
+  lon_ticks = seq(-110, -60, by = 10),
   lat_ticks = seq(30, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -3238,7 +3238,7 @@ par(
 )
 
 # geographic extent in lon/lat
-chl.ext <- terra::ext(-108, -58, 25, 65)
+chl.ext <- terra::ext(-113, -59, 25, 65)
 
 # projected extent for plotting
 chl.zoom.vect <- terra::as.polygons(chl.ext, crs = "EPSG:4326")
@@ -3305,7 +3305,7 @@ add_lonlat_labels_box(
   ext_ll = chl.ext,
   ext_map = chl.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-100, -60, by = 10),
+  lon_ticks = seq(-110, -60, by = 10),
   lat_ticks = seq(30, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -3329,7 +3329,7 @@ par(
 )
 
 # geographic extent in lon/lat
-chl.ext <- terra::ext(-108, -58, 25, 65)
+chl.ext <- terra::ext(-113, -59, 25, 65)
 
 # projected extent for plotting
 chl.zoom.vect <- terra::as.polygons(chl.ext, crs = "EPSG:4326")
@@ -3396,7 +3396,7 @@ add_lonlat_labels_box(
   ext_ll = chl.ext,
   ext_map = chl.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-100, -60, by = 10),
+  lon_ticks = seq(-110, -60, by = 10),
   lat_ticks = seq(30, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -3419,7 +3419,7 @@ par(
 )
 
 # geographic extent in lon/lat
-chl.ext <- terra::ext(-108, -58, 25, 65)
+chl.ext <- terra::ext(-113, -59, 25, 65)
 
 # projected extent for plotting
 chl.zoom.vect <- terra::as.polygons(chl.ext, crs = "EPSG:4326")
@@ -3486,7 +3486,7 @@ add_lonlat_labels_box(
   ext_ll = chl.ext,
   ext_map = chl.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-100, -60, by = 10),
+  lon_ticks = seq(-110, -60, by = 10),
   lat_ticks = seq(30, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
@@ -3509,7 +3509,7 @@ par(
 )
 
 # geographic extent in lon/lat
-chl.ext <- terra::ext(-108, -58, 25, 65)
+chl.ext <- terra::ext(-113, -59, 25, 65)
 
 # projected extent for plotting
 chl.zoom.vect <- terra::as.polygons(chl.ext, crs = "EPSG:4326")
@@ -3576,7 +3576,7 @@ add_lonlat_labels_box(
   ext_ll = chl.ext,
   ext_map = chl.zoom.ext,
   proj_crs = projMoll,
-  lon_ticks = seq(-100, -60, by = 10),
+  lon_ticks = seq(-110, -60, by = 10),
   lat_ticks = seq(30, 60, by = 10),
   cex = 0.9,
   x_off = 0.006,
