@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
 
 ## IMPORTANT NOTICE:
-This example pipeline deviates from the final workflow used in the analysis presented in `MAIN_SDM_ANALYSIS.R` and is useful as an example to start from. However, plots and results presented herein may differ from the results of work to be published.
+This example pipeline deviates from the final workflow used in the analysis presented at <https://github.com/MigicovskyLab/malus> in `MAIN_SDM_ANALYSIS.R` and is useful as an example to start from. However, plots and results presented herein may differ from the results of work to be published.
 
 ## Introduction
 
@@ -46,7 +46,7 @@ Step| Script| Purpose
 4| `malus_bg.R` | Download ecoregions, sample background points, predictor cluster, 3D Kernel density plots
 5| `malus_sdm.R` | Climate predictor data, Maxent modeling and tuning, habitat suitability predictions
 6| `sdm_plot.R` | Produce publication quality plots of SDM predictions
-7| `malus_gap` | Conservation gap analysis to assess the level of conservation of species
+7| `malus_gap.R` | Conservation gap analysis to assess the level of conservation of species
 
 **IMPORTANT NOTE:** This workflow and code differs slightly from the code published to the "https://github.com/TerrellRoulston/malus" repository, and is an example rather than a standard on how to perform species distribution. One major nuanced difference is Roulston et al., (in prep) limited the number of predictor variables using a list of well performing variables rather than using them all like in this workflow.
 
