@@ -8,12 +8,16 @@ output:
     toc_float: TRUE
 
 email_adress: "terrellroulston@gmail.com"
-github_repo: "https://github.com/TerrellRoulston/malus"
+github_repo: "https://github.com/MigicovskyLab/malus"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
+
+## IMPORTANT NOTICE:
+This example pipeline deviates from the final workflow used in the analysis presented in `MAIN_SDM_ANALYSIS.R` and is useful as an example to start from. However, plots and results presented herein may differ from the results of work to be published.
+
 ## Introduction
 
 UBC Botanical Garden is advancing action for adaptation through the development of community-based adaptation plans with the Sustainable Communities Field School. Ensuring the long-term preservation and sustainable utilization of apple genetic diversity across Canada is of paramount importance. This collaborative initiative aims to inventory and understand existing apple genetic diversity within the country. Additionally, it seeks to investigate how the suitability of habitats for apples may be affected by changing climatic conditions and emerging challenges. In response to these potential impacts, the project aims to identify urgent and longer-term adaptation strategies necessary for the continued resilience of apple populations in Canada.
@@ -163,7 +167,7 @@ setwd('../occ_data/')
 saveRDS(occ_cor, file = "occ_cor.Rdata") # name the file with the .Rdata file extension
 ```
 Now when revisiting an analysis you can reload the saved cleaned data frame rather than re-running the cleaning functions which are slow computations.
-```{r eval=TRUE}
+```{r eval=FALSE}
 setwd('./occ_data/')
 occ_cor <- readRDS(file = "occ_cor.Rdata") # read in the saved .Rdata object 
 head(occ_cor) # take a peak at your dateframe 
@@ -229,7 +233,7 @@ dev.off() # close graphics plot window
 **NOTE:** Plotting geographic coordinates can be tricky, and often you will have to play around with the plot limits and legend location to get it to something that is visually appealing.
 
 ```{r, eval = TRUE, echo=FALSE, out.width= '600px'}
-knitr::include_graphics(rep("C:/Users/terre/Documents/Acadia/Malus Project/maps/occurences/m_coronaria_pre_post_1970.jpeg"))
+knitr::include_graphics(rep("C:/Users/terre/Documents/Acadia/Malus Project/maps/OLD/occurences/m_coronaria_pre_post_1970.jpeg"))
 ```
 
 Inspecting the plot of *M. coronria* occurrences there is a large amount of overlap between occurrences from pre and post 1970, thus we feel comfortable keeping all the data no matter the year in the analysis. It is important you evaluate this for your own species and ask if it fits your research question. 
@@ -285,7 +289,7 @@ plot(wclim$wc2.1_2.5m_bio_1, main = expression(atop('WorldClim Bioclimatic Predi
 ```
 
 ```{r, eval = TRUE, echo=FALSE, out.width= '600px'}
-knitr::include_graphics(rep("C:/Users/terre/Documents/Acadia/Malus Project/maps/wclim/wclim_bio1.jpeg"))
+knitr::include_graphics(rep("C:/Users/terre/Documents/Acadia/Malus Project/maps/OLD/wclim/wclim_bio1.jpeg"))
 ```
 
 Now we have vectorized occurrence data and rasterised predictor variables, it is time to thin the occurrences data. We will use the `terra::spatSample()` function to take a random sample of a single occurrence per raster cell.
@@ -934,7 +938,7 @@ points(occThin_cor, cex = 0.05)
 ```
 
 ```{r, eval = TRUE, echo=FALSE, out.width= '1000px'}
-knitr::include_graphics(rep("C:/Users/terre/Documents/Acadia/Malus Project/maps/habitat suitability/Predicted Suitability/raw model prediction/coronaria_historical_raw.jpeg"))
+knitr::include_graphics(rep("C:/Users/terre/Documents/Acadia/Malus Project/maps/OLD/habitat suitability/Predicted Suitability/raw model prediction/coronaria_historical_raw.jpeg"))
 ```
 
 We have made our first prediction of the **fundamental niche** of *M. coronaria*! But there are a few more things to consider before moving on. 
@@ -971,7 +975,7 @@ ecospat.boyce(fit = corPred_bg_val, # vector of predicted habitat suitability of
 ```
 
 ```{r, eval = TRUE, echo=FALSE, out.width= '1000px'}
-knitr::include_graphics(rep("C:/Users/terre/Documents/Acadia/Malus Project/statistical analysis/boyce index/cor_pred_hist_cbi.jpeg"))
+knitr::include_graphics(rep("C:/Users/terre/Documents/Acadia/Malus Project/statistical analysis/boyce_index/corboyce_plot_malus_coronaria.png"))
 ```
 
 
@@ -1024,7 +1028,7 @@ legend(x = -75, y = 30, xpd = NA, inset = c(5, 0),
 ```
 
 ```{r, eval = TRUE, echo=FALSE, out.width= '1500px'}
-knitr::include_graphics(rep("C:/Users/terre/Documents/Acadia/Malus Project/maps/habitat suitability/Predicted Suitability/coronaria_historical_bin.jpeg"))
+knitr::include_graphics(rep("C:/Users/terre/Documents/Acadia/Malus Project/maps/OLD/habitat suitability/Predicted Suitability/coronaria_historical_bin.jpeg"))
 ```
 
 Now we can move on to make predictions for the future climate scenarios. We will still use the **same threshold** values from the historical prediction to keep interpretation consistent. As always, make sure to save the predictions to save time when having to reload.
@@ -1057,7 +1061,7 @@ saveRDS(cor_pred_ssp585_70, file = 'cor_pred_ssp585_70.Rdata')
 For the purposes of this tutorial I am only going to show results of one of the future climate predictions - SSP5-8.5 2020-2040 (the current tracking projection). I am using the same  code as above for the historical suitability plot.
 
 ```{r, eval = TRUE, echo=FALSE, out.width= '1500px'}
-knitr::include_graphics(rep("C:/Users/terre/Documents/Acadia/Malus Project/maps/habitat suitability/Predicted Suitability/coronaria_ssp585_bin.jpeg"))
+knitr::include_graphics(rep("C:/Users/terre/Documents/Acadia/Malus Project/maps/OLD/habitat suitability/Predicted Suitability/coronaria_ssp585_bin.jpeg"))
 ```
 
 We can see a clear shift in the fundamental niche of *M. coronaria* northward. At the same time, it seems that the climate for *M. coronaria* will be favourable in Southern Ontario, as well as an expansion in Quebec and the Maritimes. Also pay attention to areas where fundamental habitat is being lost, especially in the US. Remember that these are simply predictions, that carry a lot of assumptions.
@@ -1182,7 +1186,7 @@ legend('center', xpd = NA, title = c(as.expression(bquote(bold('Habitat Suitabil
 ```
 
 ```{r, eval = TRUE, echo=FALSE, out.width= '200px'}
-knitr::include_graphics(rep("C:/Users/terre/Documents/Acadia/Malus Project/maps/publication/suitability_legend.jpeg"))
+knitr::include_graphics(rep("C:/Users/terre/Documents/Acadia/Malus Project/maps/OLD/publication/suitability_legend.jpeg"))
 ```
 
 ```{r}
@@ -1203,13 +1207,13 @@ terra::plot(can_us_border.lcc, add = T)
 ```
 
 ```{r, eval = TRUE, echo=FALSE, out.width= '15000px'}
-knitr::include_graphics(rep("C:/Users/terre/Documents/Acadia/Malus Project/maps/publication/coronaria_historical.jpeg"))
+knitr::include_graphics(rep("C:/Users/terre/Documents/Acadia/Malus Project/maps/OLD/publication/coronaria_historical.jpeg"))
 ```
 
 Now I have repeated the plotting process for all time periods for both the SSPs. I took all those photos and went into PowerPoint and produced the following figure!
 
 ```{r, eval = TRUE, echo=FALSE, out.width= '1500px'}
-knitr::include_graphics(rep("C:/Users/terre/Documents/Acadia/Malus Project/maps/raw_figures/coronaria_habitat_suitability.jpg"))
+knitr::include_graphics(rep("C:/Users/terre/Documents/Acadia/Malus Project/maps/OLD/raw_figures/coronaria_habitat_suitability.jpg"))
 ```
 
 Now let's break down some of the decisions I made when designing the map.
@@ -1740,7 +1744,7 @@ ggarrange(cor_srs_combined, cor_grs_combined, cor_ers_combined, cor_fcs_combined
 And this is the result!
 
 ```{r, eval = TRUE, echo=FALSE, out.width= '1500px'}
-knitr::include_graphics(rep("C:/Users/terre/Documents/Acadia/Malus Project/maps/raw_figures/gap_scores/cor_in_situ_bar.jpeg"))
+knitr::include_graphics(rep("C:/Users/terre/Documents/Acadia/Malus Project/maps/OLD/raw_figures/gap_scores/cor_in_situ_bar.jpeg"))
 ```
 
 
