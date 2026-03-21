@@ -1,103 +1,169 @@
 # Top ---------------------------------------------------------------------
-# thinning occurrence data of M. coronaria and M. fusca
-# Terrell Roulston
+# Terrell Roulston; Thomas Connor
 # Started Feb 21, 2024
 
-library(tidyverse) # grammar, data management
-library(ENMeval) # ecological niche models, aka SDMs, MaxEnt
-library(raster) # working with rasters and vectors
-library(sf) # converting raster objects
-library(dismo)
-library(geodata)
-library(predicts)
+# New MESS analysis using <predicts> --------------------------------------
+# This analysis is contributed by **Thomas Connor**
+# March 21 2026
+
+# Mask future predictions
+
+# Climates is a list of raster files with given clim data for some number or all scenarios
+# occCoords is x y pos used in training maxent
+# croppedClimate is the cropped historical climate used to train maxent, a subset of climates where name == historical
 
 
-# Load thinned occurrence records -----------------------------------------
-getwd() #check wd and return or forward (../ or ./) to occ_data
-setwd("../occ_data/")
-occThin_cor <- readRDS(file = 'occThin_cor.Rdata')
-occThin_fus <- readRDS(file = 'occThin_fus.Rdata')
-# Load WorldClim data
-setwd("../wclim_data/")
-# Note DO NOT PUSH wclim data**
-wclim <- geodata::worldclim_global(var = 'bio', res = 2.5, version = '2.1', path = "../wclim_data/")
+# Libraries ---------------------------------------------------------------
+library(tidyverse) # Data management
+library(terra) # GIS
+library(predicts) # MESS
+library(geodata) # Wclim data
+
+# Helper functions --------------------------------------------------------
+apply_mess <- function(climates, occCoords, croppedClimate, progress) {
+  trainingEnv <- terra::extract(croppedClimate, occCoords, ID = FALSE)
+  
+  messRasters <- pmap(list(climates), \(clim) {
+    predicts::mess(clim, trainingEnv, progress = progress) # progress bar, takes numeric
+  })
+}
+
+# Import climate predictions and occurrence data --------------------------
+# Occurrence data
+occThin_cor <- readRDS(file = './occ_data/cor/occThin_cor.Rdata') # M. coronaria
+occThin_fus <- readRDS(file = './occ_data/fus/occThin_fus.Rdata') # M. fusca
+occThin_ion <- readRDS(file = './occ_data/ion/occThin_ion.Rdata') # M. ioensis
+occThin_ang <- readRDS(file = './occ_data/ang/occThin_ang.Rdata') # M. angustifolia
+occThin_chl <- readRDS(file = './occ_data/chl/occThin_chl.Rdata') # Chloromeles
+
+# Cropped climate data <trainingEnv>
+wclim_cor <- readRDS('./wclim_data/wclim_cor.Rdata') %>% terra::subset(c('wc2.1_2.5m_bio_1', 'wc2.1_2.5m_bio_4', 'wc2.1_2.5m_bio_10', 'wc2.1_2.5m_bio_11', 'wc2.1_2.5m_bio_15', 'wc2.1_2.5m_bio_16'))
+
+wclim_fus <- readRDS('./wclim_data/wclim_fus.Rdata') %>% terra::subset(c('wc2.1_2.5m_bio_1', 'wc2.1_2.5m_bio_4', 'wc2.1_2.5m_bio_10', 'wc2.1_2.5m_bio_11', 'wc2.1_2.5m_bio_15', 'wc2.1_2.5m_bio_16'))
+
+wclim_ion <- readRDS('./wclim_data/wclim_ion.Rdata') %>% terra::subset(c('wc2.1_2.5m_bio_1', 'wc2.1_2.5m_bio_4', 'wc2.1_2.5m_bio_10', 'wc2.1_2.5m_bio_11', 'wc2.1_2.5m_bio_15', 'wc2.1_2.5m_bio_16'))
+
+wclim_ang <- readRDS('./wclim_data/wclim_ang.Rdata') %>% terra::subset(c('wc2.1_2.5m_bio_1', 'wc2.1_2.5m_bio_4', 'wc2.1_2.5m_bio_10', 'wc2.1_2.5m_bio_11', 'wc2.1_2.5m_bio_15', 'wc2.1_2.5m_bio_16'))
+
+wclim_chl <- readRDS('./wclim_data/wclim_chl.Rdata') %>% terra::subset(c('wc2.1_2.5m_bio_1', 'wc2.1_2.5m_bio_4', 'wc2.1_2.5m_bio_10', 'wc2.1_2.5m_bio_11', 'wc2.1_2.5m_bio_15', 'wc2.1_2.5m_bio_16'))
+
+# Wclim historical and SSP245/585
+# Climate Data
+great_lakes <- vect('C:/Users/terre/Documents/Acadia/Malus Project/maps/great lakes/combined great lakes/')
+
+NA_ext <- ext(-180, -30, 18, 85) # Set spatial extent of analyis to NA in Western Hemisphere
+
+# SSP (Shared social-economic pathway) 2.45 
+# middle of the road projection, high climate adaptation, low climate mitigation
+ssp245_2030 <- cmip6_world(model = "CanESM5",
+                           ssp = "245",
+                           time = "2021-2040",
+                           var = "bioc",
+                           res = 2.5,
+                           path = "./wclim_data/") %>% 
+  crop(NA_ext) %>% #crop raster to NA 
+  mask(great_lakes, inverse = T) # cut out the great lakes
+
+ssp245_2050 <- cmip6_world(model = "CanESM5",
+                           ssp = "245",
+                           time = "2041-2060",
+                           var = "bioc",
+                           res = 2.5,
+                           path = "./wclim_data/") %>% 
+  crop(NA_ext) %>% #crop raster to NA 
+  mask(great_lakes, inverse = T) # cut out the great lakes
+
+ssp245_2070 <- cmip6_world(model = "CanESM5",
+                           ssp = "245",
+                           time = "2061-2080",
+                           var = "bioc",
+                           res = 2.5,
+                           path = "./wclim_data/") %>% 
+  crop(NA_ext) %>% #crop raster to NA 
+  mask(great_lakes, inverse = T) # cut out the great lakes
+
+# SPP 5.85 
+# low regard for enviromental sustainability, increased fossil fuel reliance, this is the current tracking projection
+ssp585_2030 <- cmip6_world(model = "CanESM5",
+                           ssp = "585",
+                           time = "2021-2040",
+                           var = "bioc",
+                           res = 2.5,
+                           path = "./wclim_data/") %>% 
+  crop(NA_ext) %>% #crop raster to NA 
+  mask(great_lakes, inverse = T) # cut out the great lakes
+
+ssp585_2050 <- cmip6_world(model = "CanESM5",
+                           ssp = "585",
+                           time = "2041-2060",
+                           var = "bioc",
+                           res = 2.5,
+                           path = "./wclim_data/") %>% 
+  crop(NA_ext) %>% #crop raster to NA 
+  mask(great_lakes, inverse = T) # cut out the great lakes
+
+ssp585_2070 <- cmip6_world(model = "CanESM5",
+                           ssp = "585",
+                           time = "2061-2080",
+                           var = "bioc",
+                           res = 2.5,
+                           path = "./wclim_data/")%>% 
+  crop(NA_ext) %>% #crop raster to NA 
+  mask(great_lakes, inverse = T) # cut out the great lakes
+
+wclim <- geodata::worldclim_global(var = 'bio',
+                                   res = 2.5, 
+                                   version = '2.1', 
+                                   path = "./wclim_data/") %>% 
+  terra::crop(NA_ext)  %>% #crop raster to NA 
+  terra::mask(great_lakes, inverse = T) # cut out the great lakes
+
+# SSP (Shared social-economic pathway) 2.45 
+# middle of the road projection, high climate adaptation, low climate mitigation
+climate_predictors <- names(wclim) # extract climate predictor names, to ren
+# Future SSPs
+# SSP 245
+names(ssp245_2030) <- climate_predictors #rename raster layers for downsteam analysis
+names(ssp245_2050) <- climate_predictors 
+names(ssp245_2070) <- climate_predictors 
+names(ssp585_2030) <- climate_predictors
+names(ssp585_2050) <- climate_predictors
+names(ssp585_2070) <- climate_predictors 
 
 
-# Download/load maps ------------------------------------------------------
-us_map <- gadm(country = 'USA', level = 1, resolution = 2,
-               path = "../occ_data/base_maps") #USA basemap w. States
+# Subset climate variables for SDM analysis 
+wclim_subs <- wclim %>% terra::subset(c('wc2.1_2.5m_bio_1', 'wc2.1_2.5m_bio_4', 'wc2.1_2.5m_bio_10', 'wc2.1_2.5m_bio_11', 'wc2.1_2.5m_bio_15', 'wc2.1_2.5m_bio_16'))
+ssp245_2030_subs <- ssp245_2030 %>% terra::subset(c('wc2.1_2.5m_bio_1', 'wc2.1_2.5m_bio_4', 'wc2.1_2.5m_bio_10', 'wc2.1_2.5m_bio_11', 'wc2.1_2.5m_bio_15', 'wc2.1_2.5m_bio_16'))
+ssp245_2050_subs <- ssp245_2050 %>% terra::subset(c('wc2.1_2.5m_bio_1', 'wc2.1_2.5m_bio_4', 'wc2.1_2.5m_bio_10', 'wc2.1_2.5m_bio_11', 'wc2.1_2.5m_bio_15', 'wc2.1_2.5m_bio_16'))
+ssp245_2070_subs <- ssp245_2070 %>% terra::subset(c('wc2.1_2.5m_bio_1', 'wc2.1_2.5m_bio_4', 'wc2.1_2.5m_bio_10', 'wc2.1_2.5m_bio_11', 'wc2.1_2.5m_bio_15', 'wc2.1_2.5m_bio_16'))
 
-ca_map <- gadm(country = 'CA', level = 1, resolution = 2,
-               path = '../occ_data/base_maps') #Canada basemap w. Provinces
-
-canUS_map <- rbind(us_map, ca_map) # combine US and Canada vector map
-
-
-# Prepare maps anddata for MESS -------------------------------------
-e <- ext(-180, 0, 10, 90) # limit extent to western hemisphere
-canUS_map <- crop(canUS_map, e) # crop raster to extent
-
-wclimCanUS <- crop(wclim, canUS_map) #crop worldclim data to Canada/US extent
-
-envs <- raster::stack(wclimCanUS) #convert worldclim data to a raster stack
-
-plot(envs[[1]]) #plot bioclimatic variable 1 to make sure raster stack worked correctly
-
-occThin_cor.x <- st_as_sf(occThin_cor) # convert spat vector to sf object
-occThin_fus.x <- st_as_sf(occThin_fus)
-
-occThin_cor.sp <- sp::SpatialPoints(occThin_cor.z)
-
-# MESS --------------------------------------------------------------------
-# Extract climatic data from cells where occurrence points are present
-# These values are a 'reference' for the model
-occThin_cor.z <- raster::extract(envs, occThin_cor.x) # M coronaria
-occThin_fus.z <- raster::extract(envs, occThin_fus.x) # M fusca
+ssp585_2030_subs <- ssp585_2030 %>% terra::subset(c('wc2.1_2.5m_bio_1', 'wc2.1_2.5m_bio_4', 'wc2.1_2.5m_bio_10', 'wc2.1_2.5m_bio_11', 'wc2.1_2.5m_bio_15', 'wc2.1_2.5m_bio_16'))
+ssp585_2050_subs <- ssp585_2050 %>% terra::subset(c('wc2.1_2.5m_bio_1', 'wc2.1_2.5m_bio_4', 'wc2.1_2.5m_bio_10', 'wc2.1_2.5m_bio_11', 'wc2.1_2.5m_bio_15', 'wc2.1_2.5m_bio_16'))
+ssp585_2070_subs <- ssp585_2070 %>% terra::subset(c('wc2.1_2.5m_bio_1', 'wc2.1_2.5m_bio_4', 'wc2.1_2.5m_bio_10', 'wc2.1_2.5m_bio_11', 'wc2.1_2.5m_bio_15', 'wc2.1_2.5m_bio_16'))
 
 
-# Compare environmental conditions of reference points to background points 
-# similarity() calculates the environmental similarity of background environments
-# to the the environments where species occurrences exist
-# positive values at more similar and negative more dissimilar 
+# Data prep ---------------------------------------------------------------
+# Reshape data to fit MESS function
 
-# occSim_cor <- ENMeval::similarity(envs, occThin_cor.z) 
-# occSim_fus <- ENMeval::similarity(envs, occThin_fus.z)
+# List climate data and name the elements as slice names
+climate_list <- list(wclim_subs, 
+                     ssp245_2030_subs, ssp245_2050_subs, ssp245_2070_subs,
+                     ssp585_2030_subs, ssp585_2050_subs, ssp585_2070_subs)
 
-# memory intensive so save and load data
-setwd("../mess_data/")
-# saveRDS(occSim_cor, file = 'occSim_cor.Rdata')
-# saveRDS(occSim_fus, file = 'occSim_fus.Rdata')
+names(climate_list) <- c('wclim', 
+                        "ssp245_2030", "ssp245_2050", "spp245_2070", 
+                        "ssp585_2030", "ssp585_2050", "ssp585_2070")
 
-occSim_cor <- readRDS(file = 'occSim_cor.Rdata')
-occSim_fus <- readRDS(file = 'occSim_fus.Rdata')
+# Extract coordinates from occurrences
+occ_crd_cor <- terra::geom(occThin_cor) %>% as.data.frame() %>% select(x, y)
+occ_crd_fus <- terra::geom(occThin_fus) %>% as.data.frame() %>% select(x, y)
+occ_crd_ion <- terra::geom(occThin_ion) %>% as.data.frame() %>% select(x, y)
+occ_crd_ang <- terra::geom(occThin_ang) %>% as.data.frame() %>% select(x, y)
+occ_crd_chl <- terra::geom(occThin_chl) %>% as.data.frame() %>% select(x, y)
 
-# Note similarity objects have three variables
-# $similarity_min is the minimum similarity values, i.e. MESS
-# $mod = which variables are most dissimilar to reference
-# $mos = which variables are most similar 
+# Run MESS analysis -------------------------------------------------------
+# What is the output of predicts:mess??
+# Malus coronaria
 
+mess_cor <- apply_mess(climates = climate_list, occCoords = occ_crd_cor, croppedClimate = wclim_cor)
 
-# MESS
-occMESS_fus <- occSim_fus$similarity_min
-occMESS_cor <- occSim_cor$similarity_min
-
-
-plot(occMESS_cor) 
-points(occThin_cor)
-
-dev.off() # close graphics device
-
-# prepare colours for the 19 climatic variables
-# mode
-category_colors <- c("#E41A1C", "#377EB8", "#4DAF4A", "#984EA3", "#FF7F00", "#FFFF33", "#A65628", "#F781BF", "#999999",
-                     "#66C2A5", "#FC8D62", "#8DA0CB", "#E78AC3", "#A6D854", "#FFD92F", "#E5C494", "#B3B3B3", "#8DD3C7", "#FFFFB3")
-
-# which variable 
-terra::plot(occSim_cor$mod, col = category_colors,
-            xlim = c(-100, -70), ylim = c(30, 50), cex = 2)
-terra::plot(canUS_map, xlim = c(-100, -70), ylim = c(30, 50), add = T)
-terra::points(occThin_cor, pch = 3, add = T, col = 'red')
-
-
-plot(occThin_cor)
-dev.off()
