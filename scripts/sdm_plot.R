@@ -949,11 +949,7 @@ dir.create("/Users/terre/Documents/Acadia/Malus Project/sdm_plot/habitat_Moll/fu
 # Plot historical distribtion
 jpeg(filename = "C:/Users/terre/Documents/Acadia/Malus Project/sdm_plot/habitat_Moll/fus/fusca_historical.jpeg", width = 10000, height = 7000, res = 300)
 
-par(
-  mar = c(1, 1, 1, 1),
-  xaxs = "i",
-  yaxs = "i"
-)
+par(fig = c(0.059, 1, 0.0354, 1), new = FALSE)
 
 # geo)graphic extent in lon/lat
 fus.ext <- terra::ext(-172, -125, 35, 70)
@@ -996,7 +992,7 @@ terra::plot(
 )
 
 # borders
-terra::plot(can_us_mex_border.moll, add = TRUE, lwd = 2.25)
+terra::plot(can_us_mex_border.moll, add = TRUE, lwd = 2.655)
 
 # graticules
 plot(
@@ -1006,7 +1002,7 @@ plot(
   labels = FALSE,
   lab.loc = c("bottom","left"),
   lab.cex = 4,
-  tick = FALSE, lwd = 2.25
+  tick = FALSE, lwd = 2.655
 )
 
 # blank plot for adding map box overtop everything
@@ -1025,13 +1021,13 @@ add_lonlat_labels_box(
   proj_crs = projMoll,
   lon_ticks = seq(-170, -120, by = 10),
   lat_ticks = seq(40, 60, by = 10),
-  cex = 4,
+  cex = 4.72,
   x_off = 0.006,
   y_off = 0.014
 )
 
 # equatorial scale bar
-add_scalebar_eq(fus.zoom.ext, bar_km = 500, y_frac = 0.05, x_frac = 0.02)
+add_scalebar_eq(fus.zoom.ext, bar_km = 500, y_frac = 0.05, x_frac = 0.02, label_cex = 4.72)
 
 dev.off()
 
@@ -1039,11 +1035,7 @@ dev.off()
 # 2030
 jpeg(filename = "C:/Users/terre/Documents/Acadia/Malus Project/sdm_plot/habitat_Moll/fus/fusca_ssp245_2030.jpeg", width = 10000, height = 7000, res = 300)
 
-par(
-  mar = c(1, 1, 1, 1),
-  xaxs = "i",
-  yaxs = "i"
-)
+par(fig = c(0.059, 1, 0.0354, 1), new = FALSE)
 
 # geographic extent in lon/lat
 fus.ext <- terra::ext(-172, -125, 35, 70)
@@ -1086,7 +1078,7 @@ terra::plot(
 )
 
 # borders
-terra::plot(can_us_mex_border.moll, add = TRUE, lwd = 2.25)
+terra::plot(can_us_mex_border.moll, add = TRUE, lwd = 2.655)
 
 # graticules
 plot(
@@ -1095,8 +1087,8 @@ plot(
   col = "grey75",
   labels = FALSE,
   lab.loc = c("bottom","left"),
-  lab.cex = 4,
-  tick = FALSE, lwd = 2.25
+  lab.cex = 4.72,
+  tick = FALSE, lwd = 2.655
 )
 
 # blank plot for adding map box overtop everything
@@ -1115,13 +1107,13 @@ add_lonlat_labels_box(
   proj_crs = projMoll,
   lon_ticks = seq(-170, -120, by = 10),
   lat_ticks = seq(40, 60, by = 10),
-  cex = 4,
+  cex = 4.72,
   x_off = 0.006,
   y_off = 0.014
 )
 
 # equatorial scale bar
-add_scalebar_eq(fus.zoom.ext, bar_km = 500, y_frac = 0.05, x_frac = 0.02)
+add_scalebar_eq(fus.zoom.ext, bar_km = 500, y_frac = 0.05, x_frac = 0.02, label_cex = 4.72)
 
 dev.off()
 
@@ -1129,11 +1121,7 @@ dev.off()
 # 2050
 jpeg(filename = "C:/Users/terre/Documents/Acadia/Malus Project/sdm_plot/habitat_Moll/fus/fusca_ssp245_2050.jpeg", width = 10000, height = 7000, res = 300)
 
-par(
-  mar = c(1, 1, 1, 1),
-  xaxs = "i",
-  yaxs = "i"
-)
+par(fig = c(0.059, 1, 0.0354, 1), new = FALSE)
 
 # geographic extent in lon/lat
 fus.ext <- terra::ext(-172, -125, 35, 70)
@@ -1176,7 +1164,7 @@ terra::plot(
 )
 
 # borders
-terra::plot(can_us_mex_border.moll, add = TRUE, lwd = 2.25)
+terra::plot(can_us_mex_border.moll, add = TRUE, lwd = 2.655)
 
 # graticules
 plot(
@@ -1185,8 +1173,8 @@ plot(
   col = "grey75",
   labels = FALSE,
   lab.loc = c("bottom","left"),
-  lab.cex = 4,
-  tick = FALSE, lwd = 2.25
+  lab.cex = 4.72,
+  tick = FALSE, lwd = 2.655
 )
 
 # blank plot for adding map box overtop everything
@@ -1205,13 +1193,13 @@ add_lonlat_labels_box(
   proj_crs = projMoll,
   lon_ticks = seq(-170, -120, by = 10),
   lat_ticks = seq(40, 60, by = 10),
-  cex = 4,
+  cex = 4.72,
   x_off = 0.006,
   y_off = 0.014
 )
 
 # equatorial scale bar
-add_scalebar_eq(fus.zoom.ext, bar_km = 500, y_frac = 0.05, x_frac = 0.02)
+add_scalebar_eq(fus.zoom.ext, bar_km = 500, y_frac = 0.05, x_frac = 0.02, label_cex = 4.72)
 
 dev.off()
 
@@ -1219,11 +1207,7 @@ dev.off()
 # 2070
 jpeg(filename = "C:/Users/terre/Documents/Acadia/Malus Project/sdm_plot/habitat_Moll/fus/fusca_ssp245_2070.jpeg", width = 10000, height = 7000, res = 300)
 
-par(
-  mar = c(1, 1, 1, 1),
-  xaxs = "i",
-  yaxs = "i"
-)
+par(fig = c(0.059, 1, 0.0354, 1), new = FALSE)
 
 # geographic extent in lon/lat
 fus.ext <- terra::ext(-172, -125, 35, 70)
@@ -1266,7 +1250,7 @@ terra::plot(
 )
 
 # borders
-terra::plot(can_us_mex_border.moll, add = TRUE, lwd = 2.25)
+terra::plot(can_us_mex_border.moll, add = TRUE, lwd = 2.655)
 
 # graticules
 plot(
@@ -1275,8 +1259,8 @@ plot(
   col = "grey75",
   labels = FALSE,
   lab.loc = c("bottom","left"),
-  lab.cex = 4,
-  tick = FALSE, lwd = 2.25
+  lab.cex = 4.72,
+  tick = FALSE, lwd = 2.655
 )
 
 # blank plot for adding map box overtop everything
@@ -1295,13 +1279,13 @@ add_lonlat_labels_box(
   proj_crs = projMoll,
   lon_ticks = seq(-170, -120, by = 10),
   lat_ticks = seq(40, 60, by = 10),
-  cex = 4,
+  cex = 4.72,
   x_off = 0.006,
   y_off = 0.014
 )
 
 # equatorial scale bar
-add_scalebar_eq(fus.zoom.ext, bar_km = 500, y_frac = 0.05, x_frac = 0.02)
+add_scalebar_eq(fus.zoom.ext, bar_km = 500, y_frac = 0.05, x_frac = 0.02, label_cex = 4.72)
 
 dev.off()
 
@@ -1310,11 +1294,7 @@ dev.off()
 # 2030
 jpeg(filename = "C:/Users/terre/Documents/Acadia/Malus Project/sdm_plot/habitat_Moll/fus/fusca_ssp585_2030.jpeg", width = 10000, height = 7000, res = 300)
 
-par(
-  mar = c(1, 1, 1, 1),
-  xaxs = "i",
-  yaxs = "i"
-)
+par(fig = c(0.059, 1, 0.0354, 1), new = FALSE)
 
 # geographic extent in lon/lat
 fus.ext <- terra::ext(-172, -125, 35, 70)
@@ -1357,7 +1337,7 @@ terra::plot(
 )
 
 # borders
-terra::plot(can_us_mex_border.moll, add = TRUE, lwd = 2.25)
+terra::plot(can_us_mex_border.moll, add = TRUE, lwd = 2.655)
 
 # graticules
 plot(
@@ -1366,8 +1346,8 @@ plot(
   col = "grey75",
   labels = FALSE,
   lab.loc = c("bottom","left"),
-  lab.cex = 4,
-  tick = FALSE, lwd = 2.25
+  lab.cex = 4.72,
+  tick = FALSE, lwd = 2.655
 )
 
 # blank plot for adding map box overtop everything
@@ -1386,13 +1366,13 @@ add_lonlat_labels_box(
   proj_crs = projMoll,
   lon_ticks = seq(-170, -120, by = 10),
   lat_ticks = seq(40, 60, by = 10),
-  cex = 4,
+  cex = 4.72,
   x_off = 0.006,
   y_off = 0.014
 )
 
 # equatorial scale bar
-add_scalebar_eq(fus.zoom.ext, bar_km = 500, y_frac = 0.05, x_frac = 0.02)
+add_scalebar_eq(fus.zoom.ext, bar_km = 500, y_frac = 0.05, x_frac = 0.02, label_cex = 4.72)
 
 dev.off()
 
@@ -1400,11 +1380,7 @@ dev.off()
 # 2050
 jpeg(filename = "C:/Users/terre/Documents/Acadia/Malus Project/sdm_plot/habitat_Moll/fus/fusca_ssp585_2050.jpeg", width = 10000, height = 7000, res = 300)
 
-par(
-  mar = c(1, 1, 1, 1),
-  xaxs = "i",
-  yaxs = "i"
-)
+par(fig = c(0.059, 1, 0.0354, 1), new = FALSE)
 
 # geographic extent in lon/lat
 fus.ext <- terra::ext(-172, -125, 35, 70)
@@ -1447,7 +1423,7 @@ terra::plot(
 )
 
 # borders
-terra::plot(can_us_mex_border.moll, add = TRUE, lwd = 2.25)
+terra::plot(can_us_mex_border.moll, add = TRUE, lwd = 2.655)
 
 # graticules
 plot(
@@ -1456,8 +1432,8 @@ plot(
   col = "grey75",
   labels = FALSE,
   lab.loc = c("bottom","left"),
-  lab.cex = 4,
-  tick = FALSE, lwd = 2.25
+  lab.cex = 4.72,
+  tick = FALSE, lwd = 2.655
 )
 
 # blank plot for adding map box overtop everything
@@ -1476,13 +1452,13 @@ add_lonlat_labels_box(
   proj_crs = projMoll,
   lon_ticks = seq(-170, -120, by = 10),
   lat_ticks = seq(40, 60, by = 10),
-  cex = 4,
+  cex = 4.72,
   x_off = 0.006,
   y_off = 0.014
 )
 
 # equatorial scale bar
-add_scalebar_eq(fus.zoom.ext, bar_km = 500, y_frac = 0.05, x_frac = 0.02)
+add_scalebar_eq(fus.zoom.ext, bar_km = 500, y_frac = 0.05, x_frac = 0.02, label_cex = 4.72)
 
 dev.off()
 
@@ -1490,11 +1466,7 @@ dev.off()
 # 2070
 jpeg(filename = "C:/Users/terre/Documents/Acadia/Malus Project/sdm_plot/habitat_Moll/fus/fusca_ssp585_2070.jpeg", width = 10000, height = 7000, res = 300)
 
-par(
-  mar = c(1, 1, 1, 1),
-  xaxs = "i",
-  yaxs = "i"
-)
+par(fig = c(0.059, 1, 0.0354, 1), new = FALSE)
 
 # geographic extent in lon/lat
 fus.ext <- terra::ext(-172, -125, 35, 70)
@@ -1537,7 +1509,7 @@ terra::plot(
 )
 
 # borders
-terra::plot(can_us_mex_border.moll, add = TRUE, lwd = 2.25)
+terra::plot(can_us_mex_border.moll, add = TRUE, lwd = 2.655)
 
 # graticules
 plot(
@@ -1546,8 +1518,8 @@ plot(
   col = "grey75",
   labels = FALSE,
   lab.loc = c("bottom","left"),
-  lab.cex = 4,
-  tick = FALSE, lwd = 2.25
+  lab.cex = 4.72,
+  tick = FALSE, lwd = 2.655
 )
 
 # blank plot for adding map box overtop everything
@@ -1566,13 +1538,13 @@ add_lonlat_labels_box(
   proj_crs = projMoll,
   lon_ticks = seq(-170, -120, by = 10),
   lat_ticks = seq(40, 60, by = 10),
-  cex = 4,
+  cex = 4.72,
   x_off = 0.006,
   y_off = 0.014
 )
 
 # equatorial scale bar
-add_scalebar_eq(fus.zoom.ext, bar_km = 500, y_frac = 0.05, x_frac = 0.02)
+add_scalebar_eq(fus.zoom.ext, bar_km = 500, y_frac = 0.05, x_frac = 0.02, label_cex = 4.72)
 
 dev.off()
 
