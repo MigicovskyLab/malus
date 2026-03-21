@@ -152,7 +152,7 @@ add_scalebar_eq <- function(ext_obj, bar_km = 500, x_frac = 0.8, y_frac = 0.035,
   
   text(x0, y0 - 0.8 * h, "0", adj = c(0.5, 1), cex = label_cex, xpd = NA)
   text(x0 + bar_m, y0 - 0.8 * h, as.character(bar_km), adj = c(0.5, 1), cex = label_cex, xpd = NA)
-  text(x0 + bar_m / 2, y0 + 1.9 * h, "km", cex = label_cex, xpd = NA)
+  text(x0 + bar_m / 2, y0 + 2.2 * h, "km", cex = label_cex, xpd = NA)
 }
 
 # Plot thinned occurrence points ------------------------------------------
@@ -162,11 +162,7 @@ jpeg(
   width = 10000, height = 6666, res = 300
 )
 
-par(
-  mar = c(1, 1, 1, 1),
-  xaxs = "i",
-  yaxs = "i"
-)
+par(fig = c(0.059, 1, 0.0354, 1), new = FALSE)
 
 # geographic extent in lon/lat
 na.ext <- terra::ext(-145, -65, 25, 75)
@@ -200,16 +196,16 @@ terra::plot(mex_map_0.moll, col = "white", add = TRUE, border = "transparent")
 terra::plot(gl_map_0.moll, col = "#E8E8E8", add = TRUE, border = "transparent")
 terra::plot(car_map_0.moll, col = "white", add = TRUE, border = "transparent")
 terra::plot(great_lakes.moll, add = TRUE, col = "lightblue", border = "grey")
-terra::plot(can_us_mex_border.moll, add = TRUE, col = "grey")
+terra::plot(can_us_mex_border.moll, add = TRUE, col = "grey", lwd = 2.25)
 
-terra::points(occThin_cor_gbif.moll, pch = 16, col = alpha("#882255", 1), cex = 1.3)
-terra::points(occThin_fus_gbif.moll, pch = 16, col = alpha("#228B22", 1), cex = 1.3)
-terra::points(occThin_cor_hus.moll, pch = 16, col = alpha("magenta", 1), cex = 1.3)
-terra::points(occThin_fus_arm.moll, pch = 16, col = alpha("#333f07", 1), cex = 1.3)
-terra::points(occThin_fus_wick.moll, pch = 16, col = alpha("#333f07", 1), cex = 1.3)
-terra::points(occThin_fus_obr_fit.moll, pch = 16, col = alpha("#333f07", 1), cex = 1.3)
-terra::points(occThin_ion.moll, pch = 16, col = alpha("#E88E00", 1), cex = 1.3)
-terra::points(occThin_ang.moll, pch = 16, col = alpha("#007CBE", 1), cex = 1.3)
+terra::points(occThin_cor_gbif.moll, pch = 16, col = alpha("#882255", 1), cex = 2)
+terra::points(occThin_fus_gbif.moll, pch = 16, col = alpha("#228B22", 1), cex = 2)
+terra::points(occThin_cor_hus.moll, pch = 16, col = alpha("magenta", 1), cex = 2)
+terra::points(occThin_fus_arm.moll, pch = 16, col = alpha("#333f07", 1), cex = 2)
+terra::points(occThin_fus_wick.moll, pch = 16, col = alpha("#333f07", 1), cex = 2)
+terra::points(occThin_fus_obr_fit.moll, pch = 16, col = alpha("#333f07", 1), cex = 2)
+terra::points(occThin_ion.moll, pch = 16, col = alpha("#E88E00", 1), cex = 2)
+terra::points(occThin_ang.moll, pch = 16, col = alpha("#007CBE", 1), cex = 2)
 
 # graticules
 plot(
@@ -217,7 +213,8 @@ plot(
   add = TRUE,
   col = "grey75",
   labels = FALSE,
-  tick = FALSE
+  tick = FALSE,
+  lwd = 2.25
 )
 
 # manual lon/lat labels
@@ -227,9 +224,9 @@ add_lonlat_labels_box(
   proj_crs = projMoll,
   lon_ticks = seq(-140, -70, by = 10),
   lat_ticks = seq(30, 70, by = 10),
-  cex = 2.2,
-  x_off = 0.0222,
-  y_off = 0.0227
+  cex = 4,
+  x_off = 0.03,
+  y_off = 0.03
 )
 
 # scale bar
@@ -238,12 +235,12 @@ add_scalebar_eq(
   bar_km = 1000,
   x_frac = 0.16,
   y_frac = 0.035,
-  label_cex = 2.5
+  label_cex = 4
 )
 
 legend(
-  x = -4.15e6,
-  y = 4.55e6,
+  x = 0.4e6,
+  y = 8.15e6,
   title = c(expression(underline('Thinned Occurrence Data'))),
   legend = c(expression(italic("Malus fusca")*"—GBIF"),
              expression(italic("Malus fusca")*"—Suppl. Data"),
@@ -256,20 +253,20 @@ legend(
   box.col = "black",
   bg = "white",
   text.col = "black",
-  cex = 2.75,
+  cex = 3.75,
   xjust = 0,
   yjust = 1,
   title.adj = 0.25
 )
 
-terra::text(1e6, 6.75e6, labels = "Hudson\nBay", cex = 2.5, col = "steelblue")
-terra::text(2.8e6, 4.3e6, labels = "Atlantic\nOcean", cex = 2.75, col = "steelblue")
-terra::text(-3.25e6, 5.5e6, labels = "Pacific\nOcean", cex = 2.75, col = "steelblue")
-terra::text(-0.25e6, 6.65e6, labels = "Canada", cex = 3, col = "black")
-terra::text(-0.25e6, 4.75e6, labels = "U.S.A.", cex = 3, col = "black")
-terra::text(-3e6, 7.35e6, labels = "U.S.A.", cex = 3, col = "black")
-terra::text(-0.35e6, 3.2e6, labels = "Mexico", cex = 3, col = "black")
-terra::text(3.1e6, 7.75e6, labels = "Greenland", cex = 3, col = "black")
+#terra::text(1e6, 6.75e6, labels = "Hudson\nBay", cex = 4, col = "steelblue")
+terra::text(2.8e6, 4.3e6, labels = "Atlantic\nOcean", cex = 3.75, col = "steelblue")
+terra::text(-3.25e6, 5.5e6, labels = "Pacific\nOcean", cex = 3.75, col = "steelblue")
+terra::text(-0.25e6, 6.65e6, labels = "Canada", cex = 4, col = "black")
+terra::text(-0.25e6, 4.75e6, labels = "U.S.A.", cex = 4, col = "black")
+terra::text(-3e6, 7.35e6, labels = "U.S.A.", cex = 4, col = "black")
+terra::text(-0.35e6, 3.2e6, labels = "Mexico", cex = 4, col = "black")
+#terra::text(3.1e6, 7.75e6, labels = "Greenland", cex = 4, col = "black")
 
 dev.off()
 
