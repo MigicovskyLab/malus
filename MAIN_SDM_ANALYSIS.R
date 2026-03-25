@@ -21,10 +21,10 @@
 
 # 000 Source Required Libraries -------------------------------------------
 # Load required libraries
-source("scripts/libraries.R")
+source("scripts/malus_sdm_paper/libraries.R")
 
 # Need to load some map data to use as strata for thinning occurrence records
-source("scripts/load_maps.R")
+source("scripts/malus_sdm_paper/load_maps.R")
 # This script also sources layers for plotting including country boundaries
 # And ecoregion data used below in background data
 
@@ -571,7 +571,7 @@ message("** Realized Niche PCA: ", date())
 # See malus_pca.R for plotting
 # This analysis builds off function created by authors of the ecospat and ade4 packages
 # I source these custom functions to save space herein
-source("./scripts/pca_and_gap_functions.R")
+source("./scripts/malus_sdm_paper/pca_and_gap_functions.R")
 
 # Convert BG Rasters to Matrices for PCA
 bg_mat_full <- values(wclim_chl_subs) %>% na.omit() # remove NA Values
@@ -667,7 +667,7 @@ print(loadings)
 #                       )
 
 # Load Niche Equivalency results from HPC
-files <- list.files("./", pattern = "niche_equiv_.*\\.rds", full.names = TRUE)
+files <- list.files("./niche_equiv", pattern = "niche_equiv_.*\\.rds", full.names = TRUE)
 
 results <- map_dfr(files, readRDS, .id = "pair")
 results$pair <- gsub("niche_equiv_|\\.rds", "", basename(results$pair))
