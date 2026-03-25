@@ -25,7 +25,7 @@ This project integrates:
 - *Malus fusca*
 - *Malus ioensis*
 - *Malus angustifolia*
-- *Malus* sect. **Chloromeles**
+- *Malus* sect. *Chloromeles*
 
 ---
 
