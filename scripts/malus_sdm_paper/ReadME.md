@@ -64,43 +64,40 @@ Scripts are modular but generally follow this order:
 ### Data Acquisition & Cleaning
 
 - **`gbif_occ_local.R`**  
-  Downloads occurrence data directly from GBIF using `rgbif`. :contentReference[oaicite:0]{index=0}  
+  Downloads occurrence data directly from GBIF using `rgbif`. 
 
 - **`gbif_occ.R`**  
-  Loads previously downloaded GBIF occurrence CSVs. :contentReference[oaicite:1]{index=1}  
+  Loads previously downloaded GBIF occurrence CSVs.
 
 - **`occ_clean.R`**  
-  Cleans occurrence data using spatial filters and coordinate validation. :contentReference[oaicite:2]{index=2}  
+  Cleans occurrence data using spatial filters and coordinate validation.
 
 ---
 
 ### Occurrence Processing
 
 - **`occ_thin.R`**  
-  Spatially thins occurrence points to reduce sampling bias. :contentReference[oaicite:3]{index=3}  
+  Spatially thins occurrence points to reduce sampling bias.
 
 - **`occ_plot.R`**  
-  Generates maps of thinned occurrences for visualization and publication. :contentReference[oaicite:4]{index=4}  
+  Generates maps of thinned occurrences for visualization and publication.
 
 ---
 
 ### Environment & Setup
 
 - **`libraries.R`**  
-  Loads required packages for the main workflow. :contentReference[oaicite:5]{index=5}  
-
-- **`librariesTyler.R`**  
-  Alternative library setup with additional tools. :contentReference[oaicite:6]{index=6}  
+  Loads required packages for the main workflow.
 
 - **`load_maps.R`**  
-  Downloads and prepares base spatial layers (GADM, Great Lakes, etc.). :contentReference[oaicite:7]{index=7}  
+  Downloads and prepares base spatial layers (GADM, Great Lakes, etc.).
 
 ---
 
 ### Background Selection
 
 - **`malus_bg.R`**  
-  Defines species-specific background extents using CEC Level II ecoregions. :contentReference[oaicite:8]{index=8}  
+  Defines species-specific background extents using CEC Level II ecoregions. 
 
 ---
 
@@ -116,33 +113,33 @@ Scripts are modular but generally follow this order:
   :contentReference[oaicite:9]{index=9}  
 
 - **`functions.R`**  
-  Custom helper functions including a modified Boyce Index (`twsBoyce`). :contentReference[oaicite:10]{index=10}  
+  Custom helper functions including a modified Boyce Index (`twsBoyce`).
 
 ---
 
 ### Climate Extrapolation
 
 - **`malus_MESS.R`**  
-  Computes MESS surfaces to identify novel climate conditions in projections. :contentReference[oaicite:11]{index=11}  
+  Computes MESS surfaces to identify novel climate conditions in projections.
 
 ---
 
 ### Niche Analysis
 
 - **`malus_pca.R`**  
-  Performs PCA-based niche comparisons across species using `ecospat`. :contentReference[oaicite:12]{index=12}  
+  Performs PCA-based niche comparisons across species using `ecospat`.
 
 - **`pca_and_gap_functions.R`**  
   Custom functions for:
   - Niche equivalency testing (permutation-based)
   - Modified niche overlap plotting (`ecospat.plot.niche.pair`)  
-  :contentReference[oaicite:13]{index=13}  
+
 
 - **`run_malus_pca_equiv.R`**  
-  HPC-compatible script for running pairwise niche equivalency tests. :contentReference[oaicite:14]{index=14}  
+  HPC-compatible script for running pairwise niche equivalency tests. 
 
 - **`RUN_PCA.sh`**  
-  SLURM job script for parallel HPC execution of PCA equivalency tests. :contentReference[oaicite:15]{index=15}  
+  SLURM job script for parallel HPC execution of PCA equivalency tests.
 
 ---
 
@@ -157,33 +154,33 @@ Scripts are modular but generally follow this order:
   :contentReference[oaicite:16]{index=16}  
 
 - **`malus_gap_occ_count.R`**  
-  Calculates occurrence-based conservation metrics. :contentReference[oaicite:17]{index=17}  
+  Calculates occurrence-based conservation metrics.
 
 - **`extract_refugia_pa_names.R`**  
-  Identifies protected areas that remain suitable under future climate scenarios. :contentReference[oaicite:18]{index=18}  
+  Identifies protected areas that remain suitable under future climate scenarios.  
 
 ---
 
 ### Summarization & Visualization
 
 - **`malus_area_latshift.R`**  
-  Summarizes habitat suitability changes across time and scenarios. :contentReference[oaicite:19]{index=19}  
+  Summarizes habitat suitability changes across time and scenarios.
 
 - **`gap_plot.R`**  
-  Produces multi-panel gap analysis figures. :contentReference[oaicite:20]{index=20}  
+  Produces multi-panel gap analysis figures. 
 
 - **`sdm_plot.R`**  
-  Generates publication-quality SDM maps (Mollweide projection, graticules, scale bars). :contentReference[oaicite:21]{index=21}  
+  Generates publication-quality SDM maps (Mollweide projection, graticules, scale bars). 
 
 - **`sdm_response.R`**  
-  Plots variable importance and response curves for SDMs. :contentReference[oaicite:22]{index=22}  
+  Plots variable importance and response curves for SDMs. 
 
 ---
 
 ### Model Diagnostics
 
 - **`var_collinear_test.R`**  
-  Assesses predictor collinearity using Pearson correlation (for reporting, not model constraint). :contentReference[oaicite:23]{index=23}  
+  Assesses predictor collinearity using Pearson correlation (for reporting, not model constraint). 
 
 ---
 
