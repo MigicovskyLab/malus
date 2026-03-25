@@ -97,7 +97,7 @@ Scripts are modular but generally follow this order:
 
 ---
 
-### 🔹 Background Selection
+### Background Selection
 
 - **`malus_bg.R`**  
   Defines species-specific background extents using CEC Level II ecoregions. :contentReference[oaicite:8]{index=8}  
