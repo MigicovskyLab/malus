@@ -150,8 +150,7 @@ Scripts are modular but generally follow this order:
   - SRSin (Species Representation)
   - GRSin (Geographic Representation)
   - ERSin (Ecological Representation)
-  - FCSin (Future Conservation Score)  
-  :contentReference[oaicite:16]{index=16}  
+  - FCSin (Final Conservation Score)= 
 
 - **`malus_gap_occ_count.R`**  
   Calculates occurrence-based conservation metrics.
