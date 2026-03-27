@@ -24,3 +24,7 @@ Roulston, T. T., Armstrong, C. G., Husband, B. C., Moreau, T., Ulrich, J., Wickh
 This work was funded in part by the UBC Botanical Garden, who is advancing action for adaptation through the development of community-based adaptation plans with the Sustainable Communities Field School. 
 
 Ensuring the long-term preservation and sustainable utilization of apple genetic diversity across Canada is of paramount importance. This collaborative initiative aims to inventory and understand existing apple genetic diversity within the country. Additionally, it seeks to investigate how the suitability of habitats for apples may be affected by changing climatic conditions and emerging challenges. In response to these potential impacts, the project aims to identify urgent and longer-term adaptation strategies necessary for the continued resilience of apple populations in Canada.
+
+Additionally, this research was enabled in part by high-performance computing resources provided by ACENET (https://www.ace-net.ca/) and the Digital Research Alliance of Canada (https://www.alliancecan.ca).
+
+ Additional funding from the Canada Research Chairs Program and NSERC Discovery to ZM. TTR was funded in part by the Science Horizons Youth Internship Program awarded by EcoCanada.
