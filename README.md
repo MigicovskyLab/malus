@@ -6,6 +6,9 @@ Last Updated: March 2026
 
 This repo contains code and data to produce species distribution models (SDMs) for *M. coronaria* and *M. fusca*; two native *Malus* crop wild relatives (CWR) of domesticated apples (*Malus domestica*) in Canada; along with code/data for SDMs on *Malus angustifolia* and *Malus ioensis*, which are native to United States. See the citation section for more details.
 
+Zenodo repository - v1.0.0 release for publication.
+[DOI10.5281/zenodo.20346975](https://doi.org/10.5281/zenodo.19334345)
+
 ## Example Workflow
 Visit <https://migicovskylab.github.io/malus/> for a detailed reproducible workflow to create *Malus* species distribution models (SDMs) using the Maxent machine learning algorithm within the `predicts` package, using presence/background occurrence data.
 
